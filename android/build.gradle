@@ -18,11 +18,11 @@ android {
     }
     defaultConfig {
 
-        applicationId "com.mygdx.game.deathmatch"
+        applicationId "com.mygdx.game.Deathmatch"
         minSdkVersion 14
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 124
+        versionName "2.0"
     }
     buildTypes {
         release {
@@ -38,7 +38,7 @@ android {
 // so they get packed with the APK.
 task copyAndroidNatives {
     doFirst {
-        file("libs/armeabi/").mkdirs()
+
         file("libs/armeabi-v7a/").mkdirs()
         file("libs/arm64-v8a/").mkdirs()
         file("libs/x86_64/").mkdirs()

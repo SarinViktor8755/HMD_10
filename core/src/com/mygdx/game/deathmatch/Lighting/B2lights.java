@@ -38,7 +38,7 @@ public class B2lights {
     public B2lights(MainGaming mg) {
         lasetOn = true;
         //Gdx.app.log("Gdx version", com.badlogic.gdx.Version.VERSION);
-        this.world = mg.getWorld();
+        //this.world = mg.getWorld();
         pointLightsList = new ArrayList<PointLight>();
         RayHandler.useDiffuseLight(true);
         this.rayHandlerHero = new RayHandler(this.world);

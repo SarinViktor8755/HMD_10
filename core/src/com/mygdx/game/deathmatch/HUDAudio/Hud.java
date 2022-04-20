@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.deathmatch.MainGaming;
+import com.mygdx.game.deathmatch.ZombiKiller;
 
 import java.util.ArrayDeque;
 
@@ -38,6 +39,8 @@ public class Hud implements Disposable {
     private DeathMess deathMess;
 
     private BitmapFont font;
+
+    int deltaButt;
 
 
 
@@ -125,12 +128,15 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
+        deltaButt = Gdx.graphics.getHeight() - ZombiKiller.HIDE_SCREEN ;
+        table.setPosition(table.getX(),table.getY() + deltaButt + 32);
 
-        table.add(raitingTextLabel).expandX().padTop(12.0f);
+
+        table.add(raitingTextLabel).expandX().padTop(0);
         table.add();
-        table.add(timerTextLabel).expandX().padTop(12.0f);
+        table.add(timerTextLabel).expandX().padTop(0);
         table.add();
-        table.add(fragsTextLabel).expandX().padTop(12.0f);
+        table.add(fragsTextLabel).expandX().padTop(0);
 
         table.row();
         table.add();
@@ -161,8 +167,12 @@ public class Hud implements Disposable {
         table2.setPosition(0, -70);
         stageHUD.addActor(table);
         stageHUD.addActor(table2);
+        Gdx.app.log("GdxTestGwtW", String.valueOf(Gdx.graphics.getWidth()));
+        Gdx.app.log("GdxTestGwtH", String.valueOf(Gdx.graphics.getHeight()));
+       // Gdx.app.debug("BUTTON222222", String.valueOf(Gdx.graphics.getWidth()));
 
 
+        table2.setPosition(table2.getX(),table2.getY()   + deltaButt + 32);
         spriteBatch = new SpriteBatch();
     }
 

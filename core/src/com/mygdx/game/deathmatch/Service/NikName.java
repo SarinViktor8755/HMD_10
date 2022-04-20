@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 public class NikName {
     public static String getNikName() {
         Preferences prefs = Gdx.app.getPreferences("NikName");
-        return prefs.getString("nik", "UserName_" + MathUtils.random(2048));
+        return prefs.getString("nik", "Name_" + MathUtils.random(2048));
     }
 
     public static void setNikName(String nik) {

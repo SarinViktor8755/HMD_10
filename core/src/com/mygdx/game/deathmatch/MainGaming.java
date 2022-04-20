@@ -39,9 +39,7 @@ public class MainGaming implements Screen {
     private MainClient mainClient;
     private ZombiKiller zk;
     private OrthographicCamera camera;
-
-    private World world;
-
+   // private World world;
     private SpriteBatch batch;
     private GameSpace gSpace;
     private MainCharacter hero;
@@ -92,7 +90,8 @@ public class MainGaming implements Screen {
         rot = new Vector2();
         this.startScreen = new StartScreen(zk);
 
-        this.world = new World(new Vector2(0, 0), true);
+       // this.world = new World(new Vector2(0, 0), true);
+
 
         setAssetsManagerGame(AssetsManagerGame.loadAllAsset(getAssetsManagerGame()));
         this.audioEngine = new AudioEngine(this);
@@ -122,6 +121,7 @@ public class MainGaming implements Screen {
         this.timeInGame = 0;
         renderStartScreen = new RenderStartScreen(zk, camera, viewport, getBatch());
         audioEngine.musicGame.pleyMusic();
+        //this.world = new World(new Vector2(0,0),true);
     }
 
     public float getTimeInGame() {
@@ -164,8 +164,8 @@ public class MainGaming implements Screen {
 
         try {
             rot.set(camera.up.x, camera.up.y);
-            getHero().getLith().setConeTower(getHero().getPosition().x, getHero().getPosition().y, rot.angle());
-            getHero().getLith().renderLights(camera); // освещение
+//            getHero().getLith().setConeTower(getHero().getPosition().x, getHero().getPosition().y, rot.angle());
+//            getHero().getLith().renderLights(camera); // освещение
            // getHero().getPoolBlood().renderAd(getBatch(), this);
         } catch (Exception e) {
         }
@@ -276,9 +276,9 @@ public class MainGaming implements Screen {
         gSpace.dispose();
     }
 
-    public World getWorld() {
-        return world;
-    }
+//    public World getWorld() {
+//        return world;
+//    }
 
     public AudioEngine getAudioEngine() {
         return audioEngine;
