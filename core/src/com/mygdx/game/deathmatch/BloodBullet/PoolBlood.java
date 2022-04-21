@@ -12,6 +12,7 @@ import com.mygdx.game.deathmatch.MainGaming;
 import com.mygdx.game.deathmatch.Service.OperationVector;
 import com.mygdx.game.deathmatch.Service.StaticService;
 import com.mygdx.game.deathmatch.BloodBullet.Bullet;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -153,9 +154,10 @@ public class PoolBlood {
         te.texture = textureRegion;
         te.score = score;
         te.transparent = false;
+        te.layer_up = true;
     }
 
-    private Blood getBoload(int x, int y, TextureRegion textureRegion, float actiontimer, float score, int xr, int yr, boolean transparent) {
+    private Blood getBoload(int x, int y, TextureRegion textureRegion, float actiontimer, float score, int xr, int yr, boolean transparent, boolean layer_up) {
         Blood te = getElementDequare();
         te.color = null;
         te.timer = 0;
@@ -167,6 +169,7 @@ public class PoolBlood {
         te.texture = textureRegion;
         te.score = score;
         te.transparent = transparent;
+        te.layer_up = layer_up;
         return te;
     }
 
@@ -183,6 +186,7 @@ public class PoolBlood {
         te.texture = textureRegion;
         te.score = score;
         te.transparent = false;
+        te.layer_up = true;
 
     }
 
@@ -200,6 +204,7 @@ public class PoolBlood {
         te.score = score;
         te.transparent = false;
         te.color = color;
+        te.layer_up = true;
     }
 
 
@@ -215,11 +220,11 @@ public class PoolBlood {
     }
 
     public void generating_rain_blood(int x, int y, int count) {
-        if(MathUtils.randomBoolean(.3f)) return;
+        if (MathUtils.randomBoolean(.3f)) return;
         temp_v.setLength(20);
         for (int i = 0; i < count; i++) {
-            temp_v.rotate(MathUtils.random(0,360));
-            getBoload(x, y, textureRegions.get(66),  MathUtils.random(.02f,0.1f), 1, (int)temp_v.y, (int)temp_v.x);
+            temp_v.rotate(MathUtils.random(0, 360));
+            getBoload(x, y, textureRegions.get(66), MathUtils.random(.02f, 0.1f), 1, (int) temp_v.y, (int) temp_v.x);
         }
     }
 
@@ -242,7 +247,7 @@ public class PoolBlood {
             int nomer_texture = MathUtils.random(1, 4);
             getCorpse(x, y, textureRegions.get(nomer_texture), MathUtils.random(0, 350), MathUtils.random(0, 350), textureRegions.get(nomer_texture + 30), player); // telo
             if (player < 0) getPoolMask(x, y, player);
-            generating_rain_blood(x, y, MathUtils.random(15,45));
+            generating_rain_blood(x, y, MathUtils.random(15, 45));
             return;
         }
         if (weapon == 3) {
@@ -254,7 +259,7 @@ public class PoolBlood {
                 getCorpse(x, y, textureRegions.get(nomer_texture), MathUtils.random(0, 350), MathUtils.random(0, 350), textureRegions.get(nomer_texture + 30), player); // telo
                 //желет
                 if (player < 0) getPoolMask(x, y, player);
-                generating_rain_blood(x, y, MathUtils.random(15,45));
+                generating_rain_blood(x, y, MathUtils.random(15, 45));
                 return;
             } else if (StaticService.selectWithProbability(20)) {
                 ejectionBlood(MathUtils.random(4, 12), x, y, angel); // направление
@@ -262,7 +267,7 @@ public class PoolBlood {
                 getCorpse(x, y, textureRegions.get(8), MathUtils.random(0, 350), MathUtils.random(0, 350), textureRegions.get(8 + 30), player); // telo
                 //желет
                 if (player < 0) getPoolMask(x, y, player);
-                generating_rain_blood(x, y, MathUtils.random(15,45));
+                generating_rain_blood(x, y, MathUtils.random(15, 45));
                 return;
             } else if (StaticService.selectWithProbability(20)) {
                 //    System.out.println("palka ubil 1 ");
@@ -277,7 +282,7 @@ public class PoolBlood {
                 if (MathUtils.randomBoolean()) yp *= -1;
                 getBoload(x, y, textureRegions.get(9), MathUtils.random(.05f, .15f), 1f, xp, yp);
 
-                generating_rain_blood(x, y, MathUtils.random(15,45));
+                generating_rain_blood(x, y, MathUtils.random(15, 45));
                 return;
             } else {
                 ejectionBlood(MathUtils.random(4, 8), x, y, angel); // направление
@@ -291,7 +296,7 @@ public class PoolBlood {
                 getBoload(x, y, textureRegions.get(10), MathUtils.random(.05f, .15f), 1f, xp, yp);
                 if (player < 0) getPoolMask(x, y, player);
                 getPoolBlood(x, y, textureRegions.get(MathUtils.random(61, 65)), 1, 1); // luga
-                generating_rain_blood(x, y, MathUtils.random(15,45));
+                generating_rain_blood(x, y, MathUtils.random(15, 45));
                 return;
             }
 
@@ -309,7 +314,7 @@ public class PoolBlood {
     private void ejectionBlood(int quantity, int x, int y) { /// добавить капля кровь
         for (int i = 0; i < quantity; i++) {
             int q = MathUtils.random(61, 65);
-            getBoload(x, y, textureRegions.get(q), MathUtils.random(.09f, .3f), MathUtils.random(.05f, .01f), MathUtils.random(-10, 10) * 2, MathUtils.random(-10, 10) * 2, true);
+            getBoload(x, y, textureRegions.get(q), MathUtils.random(.09f, .3f), MathUtils.random(.05f, .01f), MathUtils.random(-10, 10) * 2, MathUtils.random(-10, 10) * 2, true, getLayer());
         }
     }
 
@@ -331,14 +336,14 @@ public class PoolBlood {
         OperationVector.get_Setter_Temp_vector().setAngle(angle);
         for (int i = 0; i < quantity; i++) {
             int q = MathUtils.random(61, 65);
-            Blood a = getBoload(x, y, textureRegions.get(q), MathUtils.random(.09f, .3f), MathUtils.random(.1f, .11f), MathUtils.random(-10, 10) * 2, MathUtils.random(-10, 10) * 2, true);
+            Blood a = getBoload(x, y, textureRegions.get(q), MathUtils.random(.09f, .3f), MathUtils.random(.1f, .11f), MathUtils.random(-10, 10) * 2, MathUtils.random(-10, 10) * 2, true, getLayer());
             a.getAngle().setAngle(OperationVector.get_Setter_Temp_vector().angle() + MathUtils.random(-24, +24));
         }
     }
 
     private void getPoolMask(int x, int y, int player) { /// Maska
         int nomMask = mainGaming.getHero().getOtherPlayers().getMaskToID(player) + 101;
-        getBoload(x + MathUtils.random(50, 100), y + MathUtils.random(50, 100), textureRegions.get(nomMask), MathUtils.random(.09f, .2f), 1, MathUtils.random(-10, 10) * 2, MathUtils.random(-10, 10) * 2, false);
+        getBoload(x + MathUtils.random(50, 100), y + MathUtils.random(50, 100), textureRegions.get(nomMask), MathUtils.random(.09f, .2f), 1, MathUtils.random(-10, 10) * 2, MathUtils.random(-10, 10) * 2, false, getLayer());
     }
 
     private void getCorpse(int x, int y, TextureRegion textureRegion, int xr, int yr, TextureRegion jellyTexture, int nom_player) { /// добавить труп
@@ -358,11 +363,11 @@ public class PoolBlood {
     }
 
     private void getPoolBlood(int x, int y, TextureRegion textureRegion, int xr, int yr) { /// Лужа крови
-        getBoload(x, y, textureRegion, 0.2f, MathUtils.random(.4f, 1f), xr, yr, true);
+        getBoload(x, y, textureRegion, 0.2f, MathUtils.random(.4f, 1f), xr, yr, true, true);
     }
 
     private void getPoolVest(int x, int y, TextureRegion textureRegion, int xr, int yr, Color color) { /// Желет цветой
-        getBoload(x, y + 60, textureRegion, 0, MathUtils.random(.2f, .7f), xr, yr, true);
+        getBoload(x, y + 60, textureRegion, 0, MathUtils.random(.2f, .7f), xr, yr, true, true);
     }
 
     public void upDate(float deltaTime) {
@@ -388,6 +393,11 @@ public class PoolBlood {
 
     }
 
+    private boolean getLayer() {
+        if (MathUtils.randomBoolean(.5f)) return true;
+        return true;
+    }
+
     public void renders() {
         renderBlood(mainGaming.getBatch());
         renderBulet(mainGaming.getBatch());
@@ -398,30 +408,34 @@ public class PoolBlood {
         this.upDate(Gdx.graphics.getDeltaTime());
 
         int i = 0;
-        float a = 0;
+        //float a = 0;
         for (Blood b : myPriorityQueue) {
             i++;
+            if (!b.layer_up) continue;
             if (!b.isLive()) continue;
             if (b.transparent) mainGaming.getBatch().setColor(1, 1, 1, .68f);
-
-
-            // System.out.println(i + "   " + myPriorityQueue.size() +"  " +  ( (i - myPriorityQueue.size()) * -1   ));
-            //  a = M_Util.map(i,myPriorityQueue.size()*.8f,0,1,0);
-//                spriteBatch.setColor(
-//                        spriteBatch.getColor().r,
-//                        spriteBatch.getColor().g,
-//                        spriteBatch.getColor().b,
-//                       a
-//                );
-
             if (b.color != null) {
                 spriteBatch.setColor(b.color);
             }
-
             spriteBatch.draw(b.texture, b.getX() - 125, b.getY() - 125, 125, 125, 250, 250, b.score, b.score, b.angle.angle() + b.flip);
             spriteBatch.setColor(1, 1, 1, 1);
         }
-        //System.out.println();
+    }
+
+    public void renderBloodUp(SpriteBatch spriteBatch) {
+        this.upDate(Gdx.graphics.getDeltaTime());
+
+        //float a = 0;
+        for (Blood b : myPriorityQueue) {
+            if (!b.isLive()) continue;
+            if (b.layer_up) continue;
+            if (b.transparent) mainGaming.getBatch().setColor(1, 1, 1, .68f);
+            if (b.color != null) {
+                spriteBatch.setColor(b.color);
+            }
+            spriteBatch.draw(b.texture, b.getX() - 125, b.getY() - 125, 125, 125, 250, 250, b.score, b.score, b.angle.angle() + b.flip);
+            spriteBatch.setColor(1, 1, 1, 1);
+        }
     }
 
     /////////////////////////////////////////////////////////////////
@@ -515,14 +529,10 @@ public class PoolBlood {
     }
 
 
-
-
-
-
     public void renderAd(SpriteBatch spriteBatch) {
         for (SlidingAd slidingAd : slidingAdDeque) {
             if (!slidingAd.isLive()) continue;
-            slidingAd.renderAd(spriteBatch,mainGaming.getCamera().viewportHeight,mainGaming.getCamera().viewportWidth);
+            slidingAd.renderAd(spriteBatch, mainGaming.getCamera().viewportHeight, mainGaming.getCamera().viewportWidth);
         }
     }
 

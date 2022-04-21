@@ -181,6 +181,7 @@ public class MainCharacter extends Actor {
             mg.getBatch().setColor(1, 1, 1, 1);
             mg.renderAim();
             mg.getIndexMap().renderTopQualityMap();
+            poolBlood.renderBloodUp(mg.getBatch());
             if (live) {
                 //System.out.println("::::::::::::: "+ getCorrectionAngleBody());
 
@@ -205,7 +206,7 @@ public class MainCharacter extends Actor {
             otherPlayers.getPlayerToID(mg.getMainClient().getMyIdConnect()).updateCoordinatPleyer((int) position.x, (int) position.y, (int) cookAngle.angle());
             renderPlayers(animationPers);
 
-            if(MathUtils.randomBoolean(.005f))mg.getParticleCustum().addPasricalDeath_little(200,200,3);
+            //if(MathUtils.randomBoolean(.005f))mg.getParticleCustum().addPasricalDeath_little(200,200,3);
 
 
           //  if(MathUtils.randomBoolean(.005f)){particleCustum.}
@@ -331,10 +332,6 @@ public class MainCharacter extends Actor {
         //System.out.println("addAnimationAttackPipe");
         int x = (int) (position.x + cookAngle.x * 80);
         int y = (int) (position.y + cookAngle.y * 80);
-        try {
-              mg.getHero().getLith().startBulletFlash(position.x + cookAngle.x * 20, position.y + cookAngle.x * 20); ///вспышка
-        } catch (Exception e) {
-        }
 
         mg.getAudioEngine().pleySoundKickStick();
         mg.getMainClient().getOutStock().addStockInQuery(new RequestStock(// отправить на сервер

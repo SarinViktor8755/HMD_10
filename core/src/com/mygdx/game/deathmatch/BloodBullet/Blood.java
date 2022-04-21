@@ -14,6 +14,7 @@ public class Blood {
     public int flip;
     public boolean transparent; //transparent - прозрачный
     public Color color; // цвет анимации   - это желетов
+    public boolean layer_up; // верхний уровень для машин
 
     public float getTimer() {
         return timer;
@@ -66,6 +67,7 @@ public class Blood {
         this.flip = flip;
         this.score = 1;
         this.transparent = false;
+        this.layer_up = false;
 
     }
 
@@ -80,6 +82,7 @@ public class Blood {
         this.flip = flip;
         this.score = 1;
         this.transparent = transparent;
+        this.layer_up = false;
     }
 
 
@@ -92,6 +95,7 @@ public class Blood {
         this.timer = 0;
         this.actiontimer = 0;
         this.flip = 0;
+        this.layer_up = false;
     }
 
     public boolean isLive() {
