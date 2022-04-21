@@ -379,7 +379,7 @@ public class PoolBlood {
 
             if (blood.timer < blood.actiontimer) {
                 blood.timer += deltaTime / 2;
-
+                if(blood.timer < 0) continue; /// это для анимации с отрицательным таймером - Что бы небыло движение
                 OperationVector.setTemp_vector(blood.x, blood.y);
                 OperationVector.getTemp_vector().add(blood.angle.cpy().scl(.75f));
 
@@ -417,6 +417,7 @@ public class PoolBlood {
             if (b.color != null) {
                 spriteBatch.setColor(b.color);
             }
+            if(b.getTimer() < 0) continue;/// это для анимации с отрицательным таймером - Что бы небыло движение
             spriteBatch.draw(b.texture, b.getX() - 125, b.getY() - 125, 125, 125, 250, 250, b.score, b.score, b.angle.angle() + b.flip);
             spriteBatch.setColor(1, 1, 1, 1);
         }
@@ -433,6 +434,7 @@ public class PoolBlood {
             if (b.color != null) {
                 spriteBatch.setColor(b.color);
             }
+            if(b.getTimer() < 0) continue;/// это для анимации с отрицательным таймером - Что бы небыло движение
             spriteBatch.draw(b.texture, b.getX() - 125, b.getY() - 125, 125, 125, 250, 250, b.score, b.score, b.angle.angle() + b.flip);
             spriteBatch.setColor(1, 1, 1, 1);
         }
