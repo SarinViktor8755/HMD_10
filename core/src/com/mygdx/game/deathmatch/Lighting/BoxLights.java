@@ -83,6 +83,6 @@ public class BoxLights {
     public void renderLights(Camera camera) {
         rayHandler.setCombinedMatrix((OrthographicCamera) camera);
         rayHandler.updateAndRender();
-        //  box2DDebugRenderer.render(world,camera.combined);
+        box2DDebugRenderer.render(world,camera.combined);
     }
 }

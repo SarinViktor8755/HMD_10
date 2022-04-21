@@ -16,6 +16,7 @@ import com.mygdx.game.deathmatch.Characters.Animation.AnimationPers;
 import com.mygdx.game.deathmatch.ClientNetWork.SteckApi.RequestStock;
 import com.mygdx.game.deathmatch.HUDAudio.HelperScreen;
 import com.mygdx.game.deathmatch.Lighting.B2lights;
+import com.mygdx.game.deathmatch.Lighting.Lighting;
 import com.mygdx.game.deathmatch.MainGaming;
 import com.mygdx.game.deathmatch.Particles.ParticleCustum;
 import com.mygdx.game.deathmatch.Service.Key_cod;
@@ -47,7 +48,7 @@ public class MainCharacter extends Actor {
     public int myPositionTablica;
     private Weapons weapons;
     TextureRegion tr;
-    //  private Lighting lighting;
+    //private Lighting lighting;
     private ArrayList<TextureRegion> maksTexture;
 
     private HelperScreen helperScreen;
@@ -63,7 +64,7 @@ public class MainCharacter extends Actor {
     }
 
     private Color myColorGelet;
-    //private B2lights lith;
+    private B2lights lith;
 
     private HashMap<String, Integer> dk;
 
@@ -78,7 +79,6 @@ public class MainCharacter extends Actor {
     public void clearOtherPlayer() {
         getOtherPlayers().getPlayersList().clear();
     }
-
 
     public boolean isLive() {
         return live;
@@ -115,7 +115,7 @@ public class MainCharacter extends Actor {
         }
         this.helperScreen = new HelperScreen(this.mg);
 
-       // lith = new B2lights(mg);
+        lith = new B2lights(mg);
 
         textFont = new BitmapFont();
         textFont.setColor(Color.WHITE);
@@ -137,6 +137,7 @@ public class MainCharacter extends Actor {
         return weapons;
 
     }
+
 
     public Color getMyColorAndGenerate() {
         if (this.getColor() != null)
@@ -264,15 +265,15 @@ public class MainCharacter extends Actor {
         }
 
 
-//        try {
-//            lith.upDateLights(this.position.x, this.position.y, this.cookAngle.angle());
-//        } catch (Exception e) {
-//        }
+        try {
+            lith.upDateLights(this.position.x, this.position.y, this.cookAngle.angle());
+        } catch (Exception e) {
+        }
 
 
-//        if (weapons.getWeapon() == 1) lith.setLasetOn(false);
-//        else lith.setLasetOn(true);
-//        if(isLive()) lith.setLasetOn(false);
+        if (weapons.getWeapon() == 1) lith.setLasetOn(false);
+        else lith.setLasetOn(true);
+        if(isLive()) lith.setLasetOn(false);
 
 
 
@@ -328,7 +329,7 @@ public class MainCharacter extends Actor {
         int x = (int) (position.x + cookAngle.x * 80);
         int y = (int) (position.y + cookAngle.y * 80);
         try {
-            //  mg.getHero().getLith().startBulletFlash(position.x + cookAngle.x * 20, position.y + cookAngle.x * 20); ///вспышка
+              mg.getHero().getLith().startBulletFlash(position.x + cookAngle.x * 20, position.y + cookAngle.x * 20); ///вспышка
         } catch (Exception e) {
         }
 
@@ -342,17 +343,17 @@ public class MainCharacter extends Actor {
 
     }
 
-//    public B2lights getLith() {
-////        return lith;
-//    }
+    public B2lights getLith() {
+        return lith;
+    }
 
     public void attackPistol(int id) {  // добавленеи анимации удара + отправка на сервер сообщение о нанесение удара атака
         int x = (int) (position.x + cookAngle.x * 20);  // начальное положение выстрела
         int y = (int) (position.y + cookAngle.y * 20);
-//        try {
-//            mg.getHero().getLith().startBulletFlash(position.x + cookAngle.x * 20, position.y + cookAngle.x * 20); ///вспышка
-//        } catch (Exception e) {
-//        }
+        try {
+            mg.getHero().getLith().startBulletFlash(position.x + cookAngle.x * 20, position.y + cookAngle.x * 20); ///вспышка
+        } catch (Exception e) {
+        }
         int cookAngle = (int) (getCookAngle().angle());  // направление
         mg.getMainClient().getOutStock().addStockInQuery(new RequestStock(// отправить на сервер
                 mg.getMainClient().getAndUpdateRealTime(), Key_cod.GUN_SHOT,
@@ -379,10 +380,10 @@ public class MainCharacter extends Actor {
         getOtherPlayers().getPlayerToID(id).getAnimatonBody().addAnimationAttackShotgun();// добавляем анимацию
         int x = (int) (position.x + cookAngle.x * 20);  // начальное положение выстрела
         int y = (int) (position.y + cookAngle.y * 20);
-//        try {
-//            mg.getHero().getLith().startBulletFlash(position.x + cookAngle.x * 20, position.y + cookAngle.x * 20); ///вспышка
-//        } catch (Exception e) {
-//        }
+        try {
+            mg.getHero().getLith().startBulletFlash(position.x + cookAngle.x * 20, position.y + cookAngle.x * 20); ///вспышка
+        } catch (Exception e) {
+        }
         int cookAngle = (int) (getCookAngle().angle());  // направление
         mg.getAudioEngine().pleySoundKickShotgun();
         mg.getMainClient().getOutStock().addStockInQuery(new RequestStock(// отправить на сервер

@@ -39,7 +39,7 @@ public class MainGaming implements Screen {
     private MainClient mainClient;
     private ZombiKiller zk;
     private OrthographicCamera camera;
-   // private World world;
+    private World world;
     private SpriteBatch batch;
     private GameSpace gSpace;
     private MainCharacter hero;
@@ -78,7 +78,7 @@ public class MainGaming implements Screen {
         System.out.println("MainGaming !!!!!!!!!!!!!");
         this.zk = zk;
         mainClient = new MainClient(this);
-
+        this.world = new World(new Vector2(0, 0), true);
         //mainClient.coonectToServer();
         mainClient.coonectToServer();
     }
@@ -90,7 +90,7 @@ public class MainGaming implements Screen {
         rot = new Vector2();
         this.startScreen = new StartScreen(zk);
 
-       // this.world = new World(new Vector2(0, 0), true);
+
 
 
         setAssetsManagerGame(AssetsManagerGame.loadAllAsset(getAssetsManagerGame()));
@@ -164,9 +164,9 @@ public class MainGaming implements Screen {
 
         try {
             rot.set(camera.up.x, camera.up.y);
-//            getHero().getLith().setConeTower(getHero().getPosition().x, getHero().getPosition().y, rot.angle());
-//            getHero().getLith().renderLights(camera); // освещение
-           // getHero().getPoolBlood().renderAd(getBatch(), this);
+            getHero().getLith().setConeTower(getHero().getPosition().x, getHero().getPosition().y, rot.angle());
+            getHero().getLith().renderLights(camera); // освещение
+            getHero().getPoolBlood().renderAd(getBatch());
         } catch (Exception e) {
         }
 
@@ -325,4 +325,7 @@ public class MainGaming implements Screen {
     }
 
 
+    public World getWorld() {
+        return this.world;
+    }
 }

@@ -38,7 +38,7 @@ public class B2lights {
     public B2lights(MainGaming mg) {
         lasetOn = true;
         //Gdx.app.log("Gdx version", com.badlogic.gdx.Version.VERSION);
-        //this.world = mg.getWorld();
+        this.world = mg.getWorld();
         pointLightsList = new ArrayList<PointLight>();
         RayHandler.useDiffuseLight(true);
         this.rayHandlerHero = new RayHandler(this.world);
@@ -46,9 +46,11 @@ public class B2lights {
         object.crearBodys(mg.getIndexMap().getTopQualityMap_Box());
         PointLight pl;
 
-        for (int i = 0; i < 5000; i += 1000) {
-            for (int j = 0; j < 5000; j += 1000) {
-                pl = new PointLight(rayHandlerHero, 5, getColorFromPoint(), 900, j, i);
+
+            // поле
+        for (int i = 0; i < 5000; i += 500) {
+            for (int j = 0; j < 5000; j += 500) {
+                pl = new PointLight(rayHandlerHero, 10, getColorFromPoint(), 800, j, i);
                 pl.setIgnoreAttachedBody(false);
                 pointLightsList.add(pl);
             }
@@ -60,9 +62,9 @@ public class B2lights {
 
         buletFlash = new BuletFlash(rayHandlerHero);
 
-
+        //на машинах
         for (Body cars : object.getBodyList()) {
-            pl = new PointLight(rayHandlerHero, 5, getColorFromPoint(), 2330, cars.getPosition().x, cars.getPosition().y);
+            pl = new PointLight(rayHandlerHero, 4, getColorFromPoint(), 800, cars.getPosition().x, cars.getPosition().y);
             pl.attachToBody(cars);
         }
 
