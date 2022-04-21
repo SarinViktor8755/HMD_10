@@ -16,7 +16,6 @@ import com.mygdx.game.deathmatch.Characters.Animation.AnimationPers;
 import com.mygdx.game.deathmatch.ClientNetWork.SteckApi.RequestStock;
 import com.mygdx.game.deathmatch.HUDAudio.HelperScreen;
 import com.mygdx.game.deathmatch.Lighting.B2lights;
-import com.mygdx.game.deathmatch.Lighting.Lighting;
 import com.mygdx.game.deathmatch.MainGaming;
 import com.mygdx.game.deathmatch.Particles.ParticleCustum;
 import com.mygdx.game.deathmatch.Service.Key_cod;
@@ -35,7 +34,7 @@ public class MainCharacter extends Actor {
 
     AnimationPers animationPers;
 
-    private ParticleCustum particleCustum;
+
     private Vector2 cookAngle; // навправление тела
     private Vector2 acceleration; // навправление движения
     private Vector2 position; // позиция
@@ -121,7 +120,7 @@ public class MainCharacter extends Actor {
         textFont.setColor(Color.WHITE);
         textFont.setUseIntegerPositions(true);
 
-        particleCustum = new ParticleCustum();
+
 
     }
 
@@ -205,7 +204,8 @@ public class MainCharacter extends Actor {
 
             otherPlayers.getPlayerToID(mg.getMainClient().getMyIdConnect()).updateCoordinatPleyer((int) position.x, (int) position.y, (int) cookAngle.angle());
             renderPlayers(animationPers);
-            particleCustum.render(mg.getBatch(),Gdx.graphics.getDeltaTime());
+
+            if(MathUtils.randomBoolean(.005f))mg.getParticleCustum().addPasricalDeath_little(200,200,3);
 
 
           //  if(MathUtils.randomBoolean(.005f)){particleCustum.}
@@ -213,6 +213,8 @@ public class MainCharacter extends Actor {
             // mg.getAssetsManagerGame().getProgress();
             // Gdx.app.log("Asset  ", String.valueOf(mg.getAssetsManagerGame().getProgress()));
             helperScreen.updateHelper();
+            System.out.println(position.x+"  " +position.y);
+            mg.getParticleCustum().render(mg.getBatch(),Gdx.graphics.getDeltaTime());
         } catch (NullPointerException e) {
         }
     }
@@ -222,6 +224,7 @@ public class MainCharacter extends Actor {
             float k = 0;
             k = dk.get(tr.toString());
             //System.out.println(k);
+
             return MathUtils.sinDeg(mg.getHero().getOtherPlayers().getTacktPlayer(mg.getMainClient().getMyIdConnect()) * 10) * 3 + k;
         } catch (NullPointerException e) {
             return 0;

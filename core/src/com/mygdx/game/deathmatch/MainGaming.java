@@ -29,6 +29,7 @@ import com.mygdx.game.deathmatch.Ip.AndroidInputProcessorGamePley;
 import com.mygdx.game.deathmatch.Ip.DesktopInputProcessorGamePley;
 import com.mygdx.game.deathmatch.Ip.InputProc;
 import com.mygdx.game.deathmatch.LoadingScreen.StartScreen;
+import com.mygdx.game.deathmatch.Particles.ParticleCustum;
 import com.mygdx.game.deathmatch.RenderStartScreen;
 import com.mygdx.game.deathmatch.SpaceMap.IndexMap;
 import com.mygdx.game.deathmatch.Service.OperationVector;
@@ -57,6 +58,8 @@ public class MainGaming implements Screen {
     Vector2 rot;
     boolean sendAudio = true;
     private StartScreen startScreen;
+
+    ParticleCustum particleCustum;
 
     public Hud getHud() {
         return hud;
@@ -91,9 +94,10 @@ public class MainGaming implements Screen {
         this.startScreen = new StartScreen(zk);
 
 
-
-
         setAssetsManagerGame(AssetsManagerGame.loadAllAsset(getAssetsManagerGame()));
+        this.particleCustum = new ParticleCustum(getAssetsManagerGame().get("de/de.pack", TextureAtlas.class));
+
+
         this.audioEngine = new AudioEngine(this);
         this.gSpace = new GameSpace();
 
@@ -226,6 +230,10 @@ public class MainGaming implements Screen {
 //                batch.draw(textureAim, i * 15, i * 15, 2, 2);
 //        }
 
+    }
+
+    public ParticleCustum getParticleCustum() {
+        return particleCustum;
     }
 
     private void cameraMove() {

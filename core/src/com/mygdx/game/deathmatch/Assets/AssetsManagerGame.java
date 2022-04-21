@@ -16,6 +16,7 @@ public class AssetsManagerGame {
 
     static public final AssetManager loadAllAsset(AssetManager assetManager) {
         GdxNativesLoader.load();
+        assetManager.load("de/de.pack", TextureAtlas.class);
         assetManager.load("pauseAsset/pause", TextureAtlas.class);
         assetManager.finishLoading();
         assetManager.load("character/character", TextureAtlas.class);
@@ -50,6 +51,8 @@ public class AssetsManagerGame {
         assetManager.load("fonts/font.fnt", BitmapFont.class);
         assetManager.load("fonts/1.fnt", BitmapFont.class);
         assetManager.load("audio/music.ogg", Sound.class);
+
+
         assetManager.finishLoading();
         return assetManager;
     }

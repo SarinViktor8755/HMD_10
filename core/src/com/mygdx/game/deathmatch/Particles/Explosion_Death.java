@@ -55,12 +55,12 @@ public class Explosion_Death {
         return position;
     }
 
-//    public String getNameTextureRegion() {
-//        int r = 1 + Math.abs((int) MathUtils.map(0, 1.5f, 29, 0, time_life));
-//        if (r < 1) r = 1;
-//        else if (r > 30) r = 30;
-//        return String.valueOf(r);
-//    }
+    public String getNameTextureRegion() {
+        int r = 1 + Math.abs((int) MathUtils.map(0, 1.5f, 29, 0, time_life));
+        if (r < 1) r = 1;
+        else if (r > 30) r = 30;
+        return String.valueOf(r);
+    }
 
     public void addPasricalDeath_little(float x, float y, float x1, float y1, float kefZoom) {
         if (!checkViseble(x, y,x1,y1)) return;
