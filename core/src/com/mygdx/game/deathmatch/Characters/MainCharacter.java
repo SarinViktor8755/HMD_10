@@ -214,7 +214,7 @@ public class MainCharacter extends Actor {
             // mg.getAssetsManagerGame().getProgress();
             // Gdx.app.log("Asset  ", String.valueOf(mg.getAssetsManagerGame().getProgress()));
             helperScreen.updateHelper();
-            System.out.println(position.x+"  " +position.y);
+          //  System.out.println(position.x+"  " +position.y);
             mg.getParticleCustum().render(mg.getBatch(),Gdx.graphics.getDeltaTime());
         } catch (NullPointerException e) {
         }
