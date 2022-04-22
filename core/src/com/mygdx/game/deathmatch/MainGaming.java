@@ -128,6 +128,10 @@ public class MainGaming implements Screen {
         //this.world = new World(new Vector2(0,0),true);
     }
 
+    public FillViewport getViewport() {
+        return viewport;
+    }
+
     public float getTimeInGame() {
         return timeInGame;
     }

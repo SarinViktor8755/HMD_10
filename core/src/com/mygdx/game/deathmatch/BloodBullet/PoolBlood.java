@@ -394,7 +394,7 @@ public class PoolBlood {
     }
 
     private boolean getLayer() {
-        if (MathUtils.randomBoolean(.5f)) return true;
+        if (MathUtils.randomBoolean(.05f)) return false;
         return true;
     }
 

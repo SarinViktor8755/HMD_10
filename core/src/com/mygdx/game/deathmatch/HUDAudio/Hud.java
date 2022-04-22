@@ -125,29 +125,33 @@ public class Hud implements Disposable {
 
 
         Table table = new Table();
-        table.top();
+
         table.setFillParent(true);
 
         deltaButt = Gdx.graphics.getHeight() - ZombiKiller.HIDE_SCREEN ;
-        table.setPosition(table.getX(),table.getY() + deltaButt + 32);
+
 
 
         table.add(raitingTextLabel).expandX().padTop(0);
-        table.add();
         table.add(timerTextLabel).expandX().padTop(0);
-        table.add();
         table.add(fragsTextLabel).expandX().padTop(0);
 
         table.row();
-        table.add();
-        table.add(notConnectLabel);
-        table.add();
-        table.add();
-        table.add(liderMathLabel).expandX().padLeft(0).center().padTop(12.0f);
 
-        Table table2 = new Table();
-        table2.top();
-        table2.setFillParent(true);
+        table.add();
+        table.add(table2);
+
+        table.add(liderMathLabel).expandX().center().padTop(12.0f);
+
+
+
+
+            table.setDebug(true);
+
+
+      //  table2.pad(table.getMaxHeight());
+
+
 
         table2.add(declaration_death1).padLeft(0).left().padTop(11.0f);
         table2.row();
@@ -156,23 +160,31 @@ public class Hud implements Disposable {
         table2.add(declaration_death3).padLeft(0).left().padTop(11.0f);
         coinCountLabel = new Label("", style);
 
-        declaration_death2.setColor(1, 1, 1, .3f);
+        table2.setDebug(true);
+        table2.setPosition(1,Gdx.graphics.getHeight());
+        table2.top();
+        table2.center();
 
-        declaration_death1.setScale(.5f);
+//        declaration_death2.setColor(1, 1, 1, .3f);
+//
+//        declaration_death1.setScale(.5f);
       //  table.setDebug(true, true);
       //  table2.setDebug(true, true);
 
 //        System.out.println(table. + "  !!");
 //        System.out.println(table.getRowHeight(2) + "  !!");
-        table2.setPosition(0, -70);
+
+        table.top(); // Will put it at the top of our stage
+        table.setFillParent(true);
+       // table2.setFillParent(true);
         stageHUD.addActor(table);
-        stageHUD.addActor(table2);
-        Gdx.app.log("GdxTestGwtW", String.valueOf(Gdx.graphics.getWidth()));
-        Gdx.app.log("GdxTestGwtH", String.valueOf(Gdx.graphics.getHeight()));
+ //
+//        Gdx.app.log("GdxTestGwtW", String.valueOf(Gdx.graphics.getWidth()));
+//        Gdx.app.log("GdxTestGwtH", String.valueOf(Gdx.graphics.getHeight()));
        // Gdx.app.debug("BUTTON222222", String.valueOf(Gdx.graphics.getWidth()));
+     //   table.add()
 
 
-        table2.setPosition(table2.getX(),table2.getY()   + deltaButt + 32);
         spriteBatch = new SpriteBatch();
     }
 
@@ -194,13 +206,13 @@ public class Hud implements Disposable {
         this.timer = timer;
         this.liderMathLabel.setText("1st: " + max_fargs);
         this.liderMath = max_fargs;
-        this.endingMathHUD.setUpdateToServer(true);
+
 
     }
 
     public void update() {
         this.deathMess.updateMess(Gdx.graphics.getDeltaTime(), declaration_death1, declaration_death2, declaration_death3);
-
+        this.endingMathHUD.setUpdateToServer(true);//table2.setPosition(MathUtils.random(500),2);
 
     }
 
