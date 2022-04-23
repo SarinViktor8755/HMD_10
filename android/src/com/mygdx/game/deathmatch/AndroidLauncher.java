@@ -1,5 +1,9 @@
 package com.mygdx.game.deathmatch;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.badlogic.gdx.Gdx;
@@ -15,17 +19,28 @@ import com.mygdx.game.deathmatch.adMod.AdAds;
 
 public class AndroidLauncher  extends AndroidApplication implements AdAds {
 	private InterstitialAd mInterstitialAd;
+	private static final int PERMISSION_REQUEST_CODE = 1;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		GdxNativesLoader.load();
+	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+
+		GdxNativesLoader.load();
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;
 		config.useCompass = false;
 		config.useGyroscope = false;
 		// initFlavor(ZombiKiller);
-		initialize(new ZombiKiller(1,this), config);
+		int tip = 0;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			if (!isVoicePermissionGranted()) {
+				requestRecordVoice();
+			}
+			if(isVoicePermissionGranted()) tip = 1;
+		}
+
+		initialize(new ZombiKiller(tip,this), config);
 		////////////////////////////////////////////////////
 		MobileAds.initialize(this, "ca-app-pub-3062739183422189~2459416261");
 		mInterstitialAd = new InterstitialAd(this);
@@ -42,6 +57,16 @@ public class AndroidLauncher  extends AndroidApplication implements AdAds {
 		});
 		////////////////////////////////////////////////////oplata
 
+
+	}
+
+	public boolean isVoicePermissionGranted() {
+		return getContext().checkCallingOrSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
+	}
+
+	@TargetApi(Build.VERSION_CODES.M)
+	public void requestRecordVoice() {
+		requestPermissions(new String[] { Manifest.permission.RECORD_AUDIO }, PERMISSION_REQUEST_CODE);
 	}
 
 	@Override

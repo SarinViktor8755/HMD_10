@@ -1,6 +1,7 @@
 package com.mygdx.game.deathmatch;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.mygdx.game.deathmatch.Assets.AssetsManagerGame;
@@ -16,6 +17,8 @@ import com.mygdx.game.deathmatch.adMod.AdAds;
 public class ZombiKiller extends Game {
 	public AssetManager assetsManagerGame;
 
+
+
 	public static String myNikName;
 
 	static public final int WHIDE_SCREEN = 720;
@@ -23,11 +26,11 @@ public class ZombiKiller extends Game {
 //    static public final int WHIDE_SCREEN = (int)(720 * .8);
 //    static public final int HIDE_SCREEN = (int)(1520 * .8);
 
-	public byte tip = 0;
+	public int tip = 0;
 	private AdAds adMod;
+	private static boolean access_audio_recording; // доступ к записи звука
 
 
-	private MainClient mainClient;
 	private MainGaming mGaming;
 	private PauseScreen pauseScreen;
 	private LoadingScreen loadingScreen;
@@ -36,9 +39,9 @@ public class ZombiKiller extends Game {
 
 	public ZombiKiller(int tip, AdAds adMod) {
 		this.adMod = adMod;
-		this.tip = (byte) tip;
+		this.tip =  tip;
+		oprAcsees();
 	}
-
 
 	public ZombiKiller(int tip) {
 		this.tip = (byte) tip;
@@ -48,10 +51,19 @@ public class ZombiKiller extends Game {
 
 			}
 		};
+		this.oprAcsees();
 	}
+
+	public boolean isAccess_audio_recording() {
+		return access_audio_recording;
+	}
+
+
 
 	public boolean isAndroid() {
 		if (tip == 1) return true;
+		if (tip == 0) {
+			return true;} // 0 - c доступом к записи аудио
 		return false;
 	}
 
@@ -63,6 +75,7 @@ public class ZombiKiller extends Game {
 	public void create() {
 		this.startScreen = new StartScreen(this);
 		this.assetsManagerGame = new AssetManager();
+		oprAcsees();
 		AssetsManagerGame.loadAssetForMenu(assetsManagerGame);
 
 		getMenu();
@@ -94,6 +107,12 @@ public class ZombiKiller extends Game {
 		return mGaming;
 	}
 
+
+	public void oprAcsees(){
+		if(tip == 3) access_audio_recording = true; // микрафон разрешен
+		if(tip == 1) access_audio_recording = true; // микрафон разрешен - Андройд
+		if(tip == 0) access_audio_recording = false; // микрафон запрещен  - Андройд
+	}
 
 
 	public void getPauseScreen() {

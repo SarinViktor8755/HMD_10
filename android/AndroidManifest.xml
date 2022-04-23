@@ -4,6 +4,7 @@
     package="com.mygdx.game.deathmatch">
 
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"

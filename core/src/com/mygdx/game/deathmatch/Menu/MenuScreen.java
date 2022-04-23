@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -39,6 +39,7 @@ public class MenuScreen implements Screen {
     Vector2 nap;
 
 
+
   //  ShaderProgram shader;
 
     boolean long_logo;
@@ -49,8 +50,6 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(final ZombiKiller zombiKiller) {
 
-
-
 //        shaderFilm = new ShaderFilm();
 //        shaderFilm.getShader().pedantic = false;
 //        shader = new ShaderProgram(shaderFilm.getShader().getVertexShaderSource(), shaderFilm.getShader().getFragmentShaderSource());
@@ -59,8 +58,6 @@ public class MenuScreen implements Screen {
 //            System.exit(0);
 //        }
         batch = new SpriteBatch();
-
-
 
         this.zombiKiller = zombiKiller;
         timeInScreen = 0;

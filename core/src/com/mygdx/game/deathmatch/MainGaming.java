@@ -46,6 +46,7 @@ public class MainGaming implements Screen {
     private MainCharacter hero;
     private Group gHero;
 
+
     private Hud hud;
     private IndexMap indexMap; // карта
     private AudioEngine audioEngine;
@@ -58,6 +59,7 @@ public class MainGaming implements Screen {
     Vector2 rot;
     boolean sendAudio = true;
     private StartScreen startScreen;
+
 
     ParticleCustum particleCustum;
 
@@ -78,16 +80,20 @@ public class MainGaming implements Screen {
 
 
     public MainGaming(ZombiKiller zk) {
-        System.out.println("MainGaming !!!!!!!!!!!!!");
+
+        //System.out.println("MainGaming !!!!!!!!!!!!!");
         this.zk = zk;
         mainClient = new MainClient(this);
         this.world = new World(new Vector2(0, 0), true);
         //mainClient.coonectToServer();
         mainClient.coonectToServer();
+
     }
 
     @Override
     public void show() {
+
+        Gdx.app.log("access_audio_recording", String.valueOf(zk.isAccess_audio_recording()));
         System.out.println("show MainGaming");
         System.out.println();
         rot = new Vector2();
@@ -126,6 +132,9 @@ public class MainGaming implements Screen {
         renderStartScreen = new RenderStartScreen(zk, camera, viewport, getBatch());
         audioEngine.musicGame.pleyMusic();
         //this.world = new World(new Vector2(0,0),true);
+
+        Gdx.app.error("zk ::::", String.valueOf(zk.tip));
+        Gdx.app.error("zk ::::", String.valueOf(zk.isAccess_audio_recording()));
     }
 
     public FillViewport getViewport() {
@@ -192,6 +201,14 @@ public class MainGaming implements Screen {
         getBatch().end();
     }
 
+//    public boolean isWrite_permission() {
+//        return write_permission;
+//    }
+//
+//    public void setWrite_permission(boolean write_permission) {
+//        this.write_permission = write_permission;
+//    }
+
     private void updateVC() {
         // This is some sort of update method that is called periodically in you app.
         // In LibGDX it is called render(). You know the drill.
@@ -200,17 +217,18 @@ public class MainGaming implements Screen {
         // LibGDX has done this for you!
         ;
         float deltaTime = Gdx.graphics.getDeltaTime();
-
+        //Gdx.app.log("Voise", "isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise() + " acsees "+ zk.isAccess_audio_recording());
         // This would be replaced with some sort of user input, such as pressing a button.
+       // System.out.println("isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise());
+///////////////[
 
-/////////////////
-//        if(apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()){
-//            if(MathUtils.randomBoolean())System.out.println("VOISE > >"); else System.out.println("VOISE > ");
+        if(zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()){
+//            if(MathUtils.randomBoolean())System.out.println("VOISE OUT> >"); else System.out.println("VOISE > OUT");
 //            // Sends audio data to the server.
-//            mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
-//        }
-///////////////////
-    }
+            mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
+        }}
+/////////////////
+
 
 
     public void renderAim() { // отрисовать прицел

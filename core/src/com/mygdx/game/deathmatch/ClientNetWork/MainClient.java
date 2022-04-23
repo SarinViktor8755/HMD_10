@@ -32,7 +32,7 @@ public class MainClient {
 
     public int myIdConnect; //Мой ИД
 
-    //private VoiceChatClient voiceChatClient;
+    private VoiceChatClient voiceChatClient;
 
 
     public MainClient(MainGaming mg) {
@@ -46,10 +46,10 @@ public class MainClient {
         // FrameworkMessage.Ping ping = new FrameworkMessage.Ping();
         Network.register(client);
 
-        /////////////////VC
-//        voiceChatClient = new VoiceChatClient(client.getKryo());
-//        voiceChatClient.addReceiver(client);
-//////////////////
+        ///////////////VC
+        voiceChatClient = new VoiceChatClient(client.getKryo());
+        voiceChatClient.addReceiver(client);
+////////////////
 
         client.addListener(new Listener() {
 
@@ -72,9 +72,9 @@ public class MainClient {
         // messageQueue = new MessageQueue();
     }
 //
-//    public VoiceChatClient getVoiceChatClient() {
-//        return voiceChatClient;
-//    }
+    public VoiceChatClient getVoiceChatClient() {
+        return voiceChatClient;
+    }
 
     public boolean reconnect() {
 

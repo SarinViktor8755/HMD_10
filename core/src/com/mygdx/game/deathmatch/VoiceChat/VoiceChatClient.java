@@ -3,6 +3,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.AudioDevice;
 import com.badlogic.gdx.audio.AudioRecorder;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -35,7 +36,7 @@ public class VoiceChatClient implements Disposable{
 	private float timer;
 	private boolean ready = true;
 	private boolean inVoise = false;
-	
+
 	/**
 	 * Creates a new {@link VoiceChatClient} and registers net objects.
 	 * @param kryo The {@link Kryo} object that exists in KryoNet Clients and Servers.
@@ -61,6 +62,7 @@ public class VoiceChatClient implements Disposable{
 	 */
 	public VoiceChatClient(Kryo kryo){
 		this.registerNetObjects(kryo);
+		//access_audio_recording  = true; // доступ к записи звука
 	}
 	
 	/**
@@ -83,14 +85,10 @@ public class VoiceChatClient implements Disposable{
 
 	private void createRecorder(){
 
+			this.recorder = Gdx.audio.newAudioRecorder(this.getSampleRate(), true);
 
 
-
-		this.recorder = Gdx.audio.newAudioRecorder(this.getSampleRate(), true);
 	}
-
-
-
 
 
 	private void createPlayer(){
@@ -220,7 +218,7 @@ public class VoiceChatClient implements Disposable{
 					// This will block! We need to do this in a separate thread!
 					if (VoiceChatClient.this.recorder == null)
 						VoiceChatClient.this. createRecorder();
-					VoiceChatClient.this.recorder.read(data, 0, packetSize);
+						VoiceChatClient.this.recorder.read(data, 0, packetSize);
 
 					// Send to server, this will not block but may affect networking...
 					client.sendUDP(new VoiceNetData(data));

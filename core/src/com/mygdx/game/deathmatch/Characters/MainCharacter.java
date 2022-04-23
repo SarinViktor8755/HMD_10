@@ -225,7 +225,6 @@ public class MainCharacter extends Actor {
             float k = 0;
             k = dk.get(tr.toString());
             //System.out.println(k);
-
             return MathUtils.sinDeg(mg.getHero().getOtherPlayers().getTacktPlayer(mg.getMainClient().getMyIdConnect()) * 10) * 3 + k;
         } catch (NullPointerException e) {
             return 0;
