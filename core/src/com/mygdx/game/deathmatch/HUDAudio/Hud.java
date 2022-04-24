@@ -5,13 +5,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.deathmatch.MainGaming;
 import com.mygdx.game.deathmatch.ZombiKiller;
@@ -28,7 +33,7 @@ public class Hud implements Disposable {
     private Viewport viewport;
     private MainGaming mainGaming;
     private Stage stageHUD;
-    private boolean connect;
+    private boolean connect, voiseOut;
     private EndingMathHUD endingMathHUD;
     private int nPlayer, myPosition, timeM, timeS, myFrags, timer, liderMath;
     private TextureRegion textureAim;
@@ -91,10 +96,13 @@ public class Hud implements Disposable {
         font = mainGaming.getAssetsManagerGame().get("fonts/1.fnt", BitmapFont.class);
 
         endingMathHUD = new EndingMathHUD(mainGaming);
-        viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
+        viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
         stageHUD = new Stage(viewport, mainGaming.getBatch());
+        Gdx.input.setInputProcessor(stageHUD);
         first = false;
-
+        voiseOut = false;
+        final float sw = mainGaming.getZk().WHIDE_SCREEN;
+        final float sh = mainGaming.getZk().WHIDE_SCREEN;
 
         Label.LabelStyle style = new Label.LabelStyle(font, Color.WHITE);
         declaration_death1 = new Label("", style);
@@ -102,6 +110,36 @@ public class Hud implements Disposable {
         declaration_death3 = new Label("", style);
 
         deathMess = new DeathMess(declaration_death1, declaration_death2, declaration_death3);
+
+        final Image attacButton = new Image(mainGaming.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("hit3t"));
+        attacButton.setSize(200,200);
+        attacButton.setPosition(200,350);
+        attacButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+               // attackButon = true;
+
+                voiseOut = true;
+                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
+                return true;
+            }
+
+
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+            //    attackButon = true;
+                voiseOut = true;
+                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
+
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+              //  attackButon = false;
+                voiseOut = false;
+                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
+            }
+        });
 
         font.getData().setScale(.8f);
         font.getColor().set(.5f, .5f, .5f, 1);
@@ -122,15 +160,11 @@ public class Hud implements Disposable {
         timerTextLabel = new Label("0:0", style);
         liderMathLabel = new Label("asd", style);
         notConnectLabel = new Label("", style);
-
-
         Table table = new Table();
 
         table.setFillParent(true);
 
         deltaButt = Gdx.graphics.getHeight() - ZombiKiller.HIDE_SCREEN ;
-
-
 
         table.add(raitingTextLabel).expandX().padTop(0);
         table.add(timerTextLabel).expandX().padTop(0);
@@ -143,14 +177,9 @@ public class Hud implements Disposable {
 
         table.add(liderMathLabel).expandX().center().padTop(12.0f);
 
-
-
-
-            table.setDebug(true);
-
+        table.setDebug(true);
 
       //  table2.pad(table.getMaxHeight());
-
 
 
         table2.add(declaration_death1).padLeft(0).left().padTop(11.0f);
@@ -178,6 +207,9 @@ public class Hud implements Disposable {
         table.setFillParent(true);
        // table2.setFillParent(true);
         stageHUD.addActor(table);
+        stageHUD.addActor(attacButton);
+        stageHUD.setViewport(viewport);
+
  //
 //        Gdx.app.log("GdxTestGwtW", String.valueOf(Gdx.graphics.getWidth()));
 //        Gdx.app.log("GdxTestGwtH", String.valueOf(Gdx.graphics.getHeight()));
@@ -197,6 +229,14 @@ public class Hud implements Disposable {
             return false;
         }
         return true;
+    }
+
+    public boolean isVoiseOut() {
+        return voiseOut;
+    }
+
+    public void setVoiseOut(boolean voiseOut) {
+        this.voiseOut = voiseOut;
     }
 
     public void update(int myPosition, int sizePlayer, int myFrags, int timer, int max_fargs) {

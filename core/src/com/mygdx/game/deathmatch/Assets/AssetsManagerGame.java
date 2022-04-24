@@ -71,6 +71,7 @@ public class AssetsManagerGame {
         assetManager.load("menuAsset/wallpaper.png", Texture.class);
         assetManager.load("skin/craftacular-ui.json", Skin.class);
         assetManager.load("audio/tvstati.ogg", Sound.class);
+        assetManager.load("nw.png", Texture.class);
 
         assetManager.finishLoading();
         return assetManager;

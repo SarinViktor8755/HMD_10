@@ -188,4 +188,8 @@ public class AndroidInputProcessorGamePley implements InputProc {
     public boolean isVoice() {
         return true;
     }
+
+
+
+
 }

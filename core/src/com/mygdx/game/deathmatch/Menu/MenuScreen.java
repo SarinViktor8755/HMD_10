@@ -36,11 +36,12 @@ public class MenuScreen implements Screen {
     private float timerStartGame; // переменная для анимации
     TextField textField;
     Skin skinMenu;
-    Vector2 nap;
+    Vector2 nap, nwPos;
+    Texture noWar;
+    float a;
 
 
-
-  //  ShaderProgram shader;
+    //  ShaderProgram shader;
 
     boolean long_logo;
     AudioEngineMenumain audioEngineMenumain;
@@ -58,6 +59,10 @@ public class MenuScreen implements Screen {
 //            System.exit(0);
 //        }
         batch = new SpriteBatch();
+        nwPos = new Vector2();
+        nwPos.set(MathUtils.random(250), MathUtils.random(150));
+        a = MathUtils.random(15, 15);
+        // nwPos.set(250,150);
 
         this.zombiKiller = zombiKiller;
         timeInScreen = 0;
@@ -75,6 +80,7 @@ public class MenuScreen implements Screen {
         textField = new TextField(limit, skinMenu);
         wallpaper = zombiKiller.assetsManagerGame.get("menuAsset/wallpaper.png");
         logo = zombiKiller.assetsManagerGame.get("menuAsset/logo.png", Texture.class);
+        noWar = zombiKiller.assetsManagerGame.get("nw.png", Texture.class);
 ///////////////////////
         textField.setMaxLength(10);
         textField.setPosition(40, 420);
@@ -82,7 +88,7 @@ public class MenuScreen implements Screen {
         textField.setText(NikName.getNikName());
 ///////////////////////////
         textButton = new TextButton("Start game", skinMenu);
-        textButton.setPosition(40, textField.getY() -180);
+        textButton.setPosition(40, textField.getY() - 180);
         textButton.setSize(260, 80);
         textButton.addListener(new InputListener() {
             @Override
@@ -103,7 +109,7 @@ public class MenuScreen implements Screen {
                     ///отжатая кнопка
                     zombiKiller.getMainGamingNewThred();
 
-                   // System.out.println(timerStartGame);
+                    // System.out.println(timerStartGame);
 
                 }
                 return true;
@@ -115,7 +121,7 @@ public class MenuScreen implements Screen {
         Gdx.input.setInputProcessor(stageMenu);
         alphaScreen = 1;
         audioEngineMenumain = new AudioEngineMenumain(this);
-      //  zombiKiller.createGame();
+        //  zombiKiller.createGame();
 
     }
 
@@ -127,6 +133,8 @@ public class MenuScreen implements Screen {
         if (long_logo) {
             if (MathUtils.randomBoolean(.01f)) {
                 long_logo = false;
+                nwPos.set(MathUtils.random(250), MathUtils.random(50, 150));
+                a = MathUtils.random(-15, 15);
 
             }
         } else if (MathUtils.randomBoolean(.05f)) {
@@ -137,11 +145,12 @@ public class MenuScreen implements Screen {
             nap.setLength(0.5f);
             audioEngineMenumain.stopNoise();
             noise_delta = 0;
-           // batch.setShader(null);
-        } else {nap.setLength(6.8f);
+            // batch.setShader(null);
+        } else {
+            nap.setLength(6.8f);
             audioEngineMenumain.pleyNoise(Gdx.graphics.getDeltaTime());
             noise_delta = -10;
-           // batch.setShader(shader);
+            // batch.setShader(shader);
         }
 
 
@@ -153,8 +162,7 @@ public class MenuScreen implements Screen {
             textButton.setColor(1, 1, 1, alphaScreen);
             textField.setColor(1, 1, 1, alphaScreen);
             //logo.set
-            if (timerStartGame > 2)
-            {
+            if (timerStartGame > 2) {
                 ///переключенеи экрана на игру
                 zombiKiller.setScreenToGame();
                 //startGameScreen();
@@ -172,13 +180,13 @@ public class MenuScreen implements Screen {
     public void show() {
     }
 
-    private void create(){
+    private void create() {
         zombiKiller.getMainGaming(true);
     }
 
     @Override
     public void render(float delta) {
-       //System.out.println(zombiKiller.getmGaming().getMainClient().client.isConnected() + " " + timeInScreen);
+        //System.out.println(zombiKiller.getmGaming().getMainClient().client.isConnected() + " " + timeInScreen);
         upDateScreen(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -186,22 +194,23 @@ public class MenuScreen implements Screen {
         this.batch.setProjectionMatrix(camera.combined);
         this.batch.begin();
         this.batch.setColor(1, 1, 1, alphaScreen);
-        if(long_logo)
-        batch.draw(wallpaper, viewport.getScreenX() + noise_delta,
-                viewport.getScreenY() - ((Interpolation.bounce.apply((MathUtils.sin(timeInScreen) + 1) / 2) * 100)),
-                camera.viewportWidth * 1.15f, camera.viewportHeight * 1.15f); else {
+        if (long_logo)
+            batch.draw(wallpaper, viewport.getScreenX() + noise_delta,
+                    viewport.getScreenY() - ((Interpolation.bounce.apply((MathUtils.sin(timeInScreen) + 1) / 2) * 100)),
+                    camera.viewportWidth * 1.15f, camera.viewportHeight * 1.15f);
+        else {
 
             this.batch.setColor(1, 1, 1, .8f);
             batch.draw(wallpaper, viewport.getScreenX() + noise_delta,
-                    viewport.getScreenY()  - ((Interpolation.bounce.apply((MathUtils.sin(timeInScreen) + 1) / 2) * 100)),
+                    viewport.getScreenY() - ((Interpolation.bounce.apply((MathUtils.sin(timeInScreen) + 1) / 2) * 100)),
                     camera.viewportWidth * 1.15f, camera.viewportHeight * 1.15f);
             this.batch.setColor(0, 1, 0, .3f);
-            batch.draw(wallpaper, viewport.getScreenX() + MathUtils.random(-3,+10),
+            batch.draw(wallpaper, viewport.getScreenX() + MathUtils.random(-3, +10),
                     viewport.getScreenY() - ((Interpolation.bounce.apply((MathUtils.sin(timeInScreen) + 1) / 2) * 100)),
                     camera.viewportWidth * 1.15f, camera.viewportHeight * 1.15f);
 
             this.batch.setColor(1, 0, 0, .3f);
-            batch.draw(wallpaper, viewport.getScreenX() + MathUtils.random(-10,+5),
+            batch.draw(wallpaper, viewport.getScreenX() + MathUtils.random(-10, +5),
                     viewport.getScreenY() - ((Interpolation.bounce.apply((MathUtils.sin(timeInScreen) + 1) / 2) * 100)),
                     camera.viewportWidth * 1.15f, camera.viewportHeight * 1.15f
 
@@ -213,23 +222,49 @@ public class MenuScreen implements Screen {
 
         for (int i = 8; i > 0; i--) {
             //batch.draw(logo, viewport.getScreenX() - (i * nap.x), (viewport.getScreenY() + 550 + ((MathUtils.cos(timeInScreen * 3) + 1) / 2) * 20) - (i * nap.y));
-            if (MathUtils.randomBoolean(.3f)){
+            if (MathUtils.randomBoolean(.3f)) {
                 batch.setColor(MathUtils.random(.4f, 1f), MathUtils.sin(i / 2f), MathUtils.sin(i / 2f), alphaScreen);
 
 
             }
             this.batch.setColor(1, 1, .4f, alphaScreen);
-            if (long_logo){
+            if (long_logo) {
                 batch.draw(logo, viewport.getScreenX() - (i * nap.x + MathUtils.random(.5f)), viewport.getScreenY() + 590 - (i * nap.y) + MathUtils.random(.5f));
-            }
-            else
+            } else
                 batch.draw(logo, viewport.getScreenX() - (i * nap.x + MathUtils.random(.5f)) + MathUtils.random(-5, 5), viewport.getScreenY() + 590 - (i * nap.y) + MathUtils.random(.5f) + MathUtils.random(-5, 5));
             batch.setColor(1, 1, 1, 1);
+            // batch.draw(noWar, viewport.getScreenX()- (i * nap.x + MathUtils.random(.5f)), -500 +viewport.getScreenY() + 590 - (i * nap.y) + MathUtils.random(.5f));
+        }
+
+        // System.out.println(MathUtils.sin(timeInScreen));
+
+        if (long_logo)
+            renerNW();
+        else {
+            for (int i = 0; i < MathUtils.random(5,24); i++) {
+                this.batch.setColor(MathUtils.random(2),MathUtils.random(2),MathUtils.random(2), alphaScreen -.4f);
+                renerNW();
+                nwPos.set(MathUtils.random(250), MathUtils.random(150));
+            }
         }
         //  batch.draw(wallpaper,0,0,1500,1500);
         this.batch.end();
 
         stageMenu.draw();
+    }
+
+    private void renerNW() {
+        float k = Interpolation.swing.apply(MathUtils.map(-1, 1, .9f, 1.3f, MathUtils.sin(timeInScreen * 3)));
+        batch.draw(noWar,
+                nwPos.x, nwPos.y,
+                noWar.getWidth() / 2, noWar.getHeight() / 2,
+                noWar.getWidth(), noWar.getHeight(),
+                k, k,
+                a,
+                0, 0,
+                noWar.getWidth(), noWar.getHeight(),
+                false, false
+        );
     }
 
     @Override

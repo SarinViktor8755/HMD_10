@@ -133,9 +133,9 @@ public class MainGaming implements Screen {
         audioEngine.musicGame.pleyMusic();
         //this.world = new World(new Vector2(0,0),true);
 
-        Gdx.app.error("zk ::::", String.valueOf(zk.tip));
-        Gdx.app.error("zk ::::", String.valueOf(zk.isAccess_audio_recording()));
-    }
+//        Gdx.app.error("zk ::::", String.valueOf(zk.tip));
+//        Gdx.app.error("zk ::::", String.valueOf(zk.isAccess_audio_recording()));
+   }
 
     public FillViewport getViewport() {
         return viewport;
@@ -222,7 +222,7 @@ public class MainGaming implements Screen {
        // System.out.println("isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise());
 ///////////////[
 
-        if(zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()){
+        if(zk.isAccess_audio_recording() && hud.isVoiseOut() && !mainClient.getVoiceChatClient().isInVoise()){
 //            if(MathUtils.randomBoolean())System.out.println("VOISE OUT> >"); else System.out.println("VOISE > OUT");
 //            // Sends audio data to the server.
             mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
