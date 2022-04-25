@@ -110,6 +110,8 @@ public class Hud implements Disposable {
         declaration_death3 = new Label("", style);
 
         deathMess = new DeathMess(declaration_death1, declaration_death2, declaration_death3);
+        int wd = Gdx.graphics.getWidth();
+        System.out.println("wd :: " +wd);
 
         final Image attacButton = new Image(mainGaming.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("hit3t"));
         attacButton.setSize(200,200);
