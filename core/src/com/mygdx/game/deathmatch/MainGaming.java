@@ -1,6 +1,7 @@
 package com.mygdx.game.deathmatch;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Camera;
@@ -51,14 +52,15 @@ public class MainGaming implements Screen {
     private IndexMap indexMap; // карта
     private AudioEngine audioEngine;
     private SoundTrack soundtrack;
-    private AssetsManagerGame assetsManagerGame;
+
     private TextureRegion textureAim;
     private FillViewport viewport;
     private RenderStartScreen renderStartScreen;
     private float timeInGame;
     Vector2 rot;
-    boolean sendAudio = true;
     private StartScreen startScreen;
+    private InputProc apInput;
+    InputMultiplexer inputMultiplexer;
 
 
     ParticleCustum particleCustum;
@@ -76,7 +78,7 @@ public class MainGaming implements Screen {
         return this;
     }
 
-    private InputProc apInput;
+
 
 
     public MainGaming(ZombiKiller zk) {
@@ -115,17 +117,22 @@ public class MainGaming implements Screen {
         camera = new OrthographicCamera(zk.WHIDE_SCREEN, zk.HIDE_SCREEN);
         viewport = new FillViewport(zk.WHIDE_SCREEN, zk.HIDE_SCREEN, camera);
 
+        inputMultiplexer = new InputMultiplexer();
 
-        if (zk.isAndroid()) apInput = new AndroidInputProcessorGamePley(this);
+        if (zk.isAndroid()) inputMultiplexer.setProcessors(new AndroidInputProcessorGamePley(this));
 
 
         else {
-            apInput = new DesktopInputProcessorGamePley(this);
-            Gdx.input.setCursorCatched(true);
+            inputMultiplexer.setProcessors(new DesktopInputProcessorGamePley(this));
+
+            Gdx.input.setInputProcessor(inputMultiplexer);
+           // Gdx.input.setCursorCatched(true);
         }
-        Gdx.input.setInputProcessor(apInput);
+
+
         //zk.getMainGameScreen();
         hud = new Hud(this);
+        inputMultiplexer.setProcessors(hud.getStageHUD());
         soundtrack = new SoundTrack(this);
         textureAim = getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("aim");
         this.timeInGame = 0;
@@ -135,6 +142,8 @@ public class MainGaming implements Screen {
 
 //        Gdx.app.error("zk ::::", String.valueOf(zk.tip));
 //        Gdx.app.error("zk ::::", String.valueOf(zk.isAccess_audio_recording()));
+
+        Gdx.input.setInputProcessor(inputMultiplexer);
    }
 
     public FillViewport getViewport() {

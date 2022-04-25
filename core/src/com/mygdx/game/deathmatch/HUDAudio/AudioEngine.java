@@ -112,6 +112,7 @@ public class AudioEngine {
         sound.play();
     }
     public void pleyVoice() {
+        if(getInVoise()) return;
         Sound sound = mainGaming.getAssetsManagerGame().get("voice/voice"+MathUtils.random(1,5)+".ogg", Sound.class);
         sound.play();
     }
@@ -130,6 +131,14 @@ public class AudioEngine {
         sound.setVolume(id, distanc);
         // System.out.println(distanc);
 
+    }
+
+    public boolean getInVoise(){ // проеряет есть ли звук
+        try {
+       return mainGaming.getMainClient().getVoiceChatClient().isInVoise();
+        } catch (NullPointerException e){
+            return false;
+        }
     }
 
 
@@ -166,6 +175,7 @@ public class AudioEngine {
 
     //////////////////////////////////////////////////////////
     public void act(float dt) {
+        musicGame.muteOut(getInVoise(),dt); // проверка и приглушения звука от голоса )) - надо провреить как работает
         Iterator<Map.Entry<Integer, Float>> entries = this.stepCounter.entrySet().iterator();
         cleanStepCounter(dt);
         //System.out.println(this.getStepCounter());
