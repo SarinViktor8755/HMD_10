@@ -50,7 +50,7 @@ public class B2lights {
             // поле
         for (int i = 0; i < 5000; i += 500) {
             for (int j = 0; j < 5000; j += 500) {
-                pl = new PointLight(rayHandlerHero, 10, getColorFromPoint(), 800, j, i);
+                pl = new PointLight(rayHandlerHero, 10, getColorFromPoint(), 1300, j, i);
                 pl.setIgnoreAttachedBody(false);
                 pointLightsList.add(pl);
             }

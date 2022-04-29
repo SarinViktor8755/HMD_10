@@ -72,7 +72,7 @@ public class DesktopInputProcessorGamePley implements InputProc {
         if(keycode == 131) {
             Gdx.app.exit();
         }
-        return false;
+        return true;
     }
 
     @Override

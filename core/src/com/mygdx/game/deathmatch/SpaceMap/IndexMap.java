@@ -247,7 +247,7 @@ public class IndexMap {
         AverageObject ao;
 
         TextureRegion textureRegion = mainGaming.getAssetsManagerGame().get("map/obstacles", TextureAtlas.class).findRegion("logo");
-        ao = new AverageObject(2500,2500,5,0, mainGaming,obstacles,textureRegion);
+        ao = new AverageObject(1410,2200,5,0, mainGaming,obstacles,textureRegion);
         averageLevelObjects.put(averageLevelObjects.size() + 1, ao);
         textureRegion.getTexture().setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear);
         textureRegion = mainGaming.getAssetsManagerGame().get("map/groiund", TextureAtlas.class).findRegion("zed");

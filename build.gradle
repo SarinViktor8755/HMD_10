@@ -59,6 +59,10 @@ project(":android") {
 
     configurations { natives }
 
+    android {
+        ndkVersion '21.3.6528147'
+    }
+
     dependencies {
         implementation project(":core")
 

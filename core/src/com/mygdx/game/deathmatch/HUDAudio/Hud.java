@@ -115,7 +115,7 @@ public class Hud implements Disposable {
 
         final Image attacButton = new Image(mainGaming.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("hit3t"));
         attacButton.setSize(200,200);
-        attacButton.setPosition(200,350);
+        attacButton.setPosition(wd - 300,1);
         attacButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -123,7 +123,7 @@ public class Hud implements Disposable {
 
                 voiseOut = true;
                 Gdx.app.error("voiseOut", String.valueOf(voiseOut));
-                return true;
+                return false;
             }
 
 
@@ -250,11 +250,14 @@ public class Hud implements Disposable {
         this.liderMath = max_fargs;
 
 
+
     }
 
     public void update() {
+       // voiseOut = false;
         this.deathMess.updateMess(Gdx.graphics.getDeltaTime(), declaration_death1, declaration_death2, declaration_death3);
         this.endingMathHUD.setUpdateToServer(true);//table2.setPosition(MathUtils.random(500),2);
+        Gdx.app.error("voiseOut>>>", String.valueOf(voiseOut));
 
     }
 

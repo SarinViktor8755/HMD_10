@@ -79,8 +79,6 @@ public class MainGaming implements Screen {
     }
 
 
-
-
     public MainGaming(ZombiKiller zk) {
 
         //System.out.println("MainGaming !!!!!!!!!!!!!");
@@ -94,13 +92,11 @@ public class MainGaming implements Screen {
 
     @Override
     public void show() {
-
         Gdx.app.log("access_audio_recording", String.valueOf(zk.isAccess_audio_recording()));
         System.out.println("show MainGaming");
         System.out.println();
         rot = new Vector2();
         this.startScreen = new StartScreen(zk);
-
 
         setAssetsManagerGame(AssetsManagerGame.loadAllAsset(getAssetsManagerGame()));
         this.particleCustum = new ParticleCustum(getAssetsManagerGame().get("de/de.pack", TextureAtlas.class));
@@ -115,19 +111,25 @@ public class MainGaming implements Screen {
         gHero.addActor(hero);
         batch = new SpriteBatch();
         camera = new OrthographicCamera(zk.WHIDE_SCREEN, zk.HIDE_SCREEN);
-        viewport = new FillViewport(zk.WHIDE_SCREEN, zk.HIDE_SCREEN, camera);
+        viewport = new FillViewport(7000   ,7000, camera);
 
         inputMultiplexer = new InputMultiplexer();
 
-        if (zk.isAndroid()) inputMultiplexer.setProcessors(new AndroidInputProcessorGamePley(this));
+        if (zk.isAndroid()) {
+                apInput = new AndroidInputProcessorGamePley(this);
+                 Gdx.input.setInputProcessor(inputMultiplexer);
 
-
+        }
         else {
-            inputMultiplexer.setProcessors(new DesktopInputProcessorGamePley(this));
+            apInput = new DesktopInputProcessorGamePley(this);
 
-            Gdx.input.setInputProcessor(inputMultiplexer);
+           // inputMultiplexer.setProcessors(apInput);
+
+
+
            // Gdx.input.setCursorCatched(true);
         }
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
 
         //zk.getMainGameScreen();
