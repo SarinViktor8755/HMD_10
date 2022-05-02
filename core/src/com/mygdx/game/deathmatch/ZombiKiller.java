@@ -21,10 +21,10 @@ public class ZombiKiller extends Game {
 
 	public static String myNikName;
 
-//	static public final int WHIDE_SCREEN = 720;
-//	static public final int HIDE_SCREEN = 1520;
-    static public final int WHIDE_SCREEN = (int)(720 * .8);
-    static public final int HIDE_SCREEN = (int)(1520 * .8);
+	static public final int WHIDE_SCREEN = 720;
+	static public final int HIDE_SCREEN = 1520;
+//    static public final int WHIDE_SCREEN = (int)(720 * .8);
+//    static public final int HIDE_SCREEN = (int)(1520 * .8);
 
 	public int tip = 0;
 	private AdAds adMod;

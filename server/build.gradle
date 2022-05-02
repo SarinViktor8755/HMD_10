@@ -36,7 +36,7 @@ dependencies {
 }
 
 eclipse.project {
-    name = appName + "-serCS"
+    name = appName + "-ser"
 }
 
 java {

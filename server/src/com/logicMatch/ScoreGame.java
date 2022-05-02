@@ -103,7 +103,8 @@ public class ScoreGame {
 }
 
 class raitingTemp {
-    int  r,id, f;
+    private int  r,id, f;
+    private String nikName;
 
     public raitingTemp(int r,int id, int f) {
         this.id = id;
@@ -111,11 +112,18 @@ class raitingTemp {
         this.r = r;
     }
 
+    public void setNikName(String nikName) {
+        this.nikName = nikName;
+    }
+
     @Override
     public String toString() {
-        return          r +
-                        ":" + id +
-                        ":" + f;
+        return "raitingTemp{" +
+                "r=" + r +
+                ", id=" + id +
+                ", f=" + f +
+                ", nikName='" + nikName + '\'' +
+                '}';
     }
 }
 

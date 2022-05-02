@@ -17,13 +17,18 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.deathmatch.Service.NikName;
 import com.mygdx.game.deathmatch.ZombiKiller;
 
+import java.io.File;
+
 public class MenuScreen implements Screen {
     private SpriteBatch batch;
-    private StretchViewport viewport;
+    private Viewport viewport;
     private OrthographicCamera camera;
     private String limit = "";
     private float alphaScreen;
@@ -71,9 +76,9 @@ public class MenuScreen implements Screen {
         nap = new Vector2(1.5f, 0);
 
         camera = new OrthographicCamera();
-        viewport = new StretchViewport(ZombiKiller.WHIDE_SCREEN / 2, ZombiKiller.HIDE_SCREEN / 2, camera);
+        viewport = new FillViewport(ZombiKiller.WHIDE_SCREEN/2, ZombiKiller.HIDE_SCREEN/2, camera);
         viewport.apply();
-        camera.position.set(camera.viewportWidth / 10, camera.viewportHeight / 10, 0);
+        camera.position.set(camera.viewportWidth , camera.viewportHeight, 0);
         camera.update();
         stageMenu = new Stage(viewport);
         skinMenu = zombiKiller.assetsManagerGame.get("skin/craftacular-ui.json");
@@ -255,6 +260,7 @@ public class MenuScreen implements Screen {
 
     private void renerNW() {
         float k = Interpolation.swing.apply(MathUtils.map(-1, 1, .9f, 1.3f, MathUtils.sin(timeInScreen * 3)));
+        batch.setColor(1,1,1,alphaScreen);
         batch.draw(noWar,
                 nwPos.x, nwPos.y,
                 noWar.getWidth() / 2, noWar.getHeight() / 2,
