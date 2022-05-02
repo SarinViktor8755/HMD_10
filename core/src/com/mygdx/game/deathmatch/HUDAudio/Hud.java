@@ -217,8 +217,6 @@ public class Hud implements Disposable {
 //        Gdx.app.log("GdxTestGwtH", String.valueOf(Gdx.graphics.getHeight()));
        // Gdx.app.debug("BUTTON222222", String.valueOf(Gdx.graphics.getWidth()));
      //   table.add()
-
-
         spriteBatch = new SpriteBatch();
     }
 
@@ -248,9 +246,6 @@ public class Hud implements Disposable {
         this.timer = timer;
         this.liderMathLabel.setText("1st: " + max_fargs);
         this.liderMath = max_fargs;
-
-
-
     }
 
     public void update() {
@@ -258,7 +253,6 @@ public class Hud implements Disposable {
         this.deathMess.updateMess(Gdx.graphics.getDeltaTime(), declaration_death1, declaration_death2, declaration_death3);
         this.endingMathHUD.setUpdateToServer(true);//table2.setPosition(MathUtils.random(500),2);
         Gdx.app.error("voiseOut>>>", String.valueOf(voiseOut));
-
     }
 
 
@@ -318,9 +312,6 @@ public class Hud implements Disposable {
 
     public void render(float dt) {
         stageHUD.draw();
-
-
-
     }
 
 
