@@ -48,7 +48,7 @@ public class Hud implements Disposable {
     int deltaButt;
 
 
-
+    final Image attacButton;
     Label coinCountLabel;
     Label raitingTextLabel; // 1/3
     Label fragsTextLabel;
@@ -98,7 +98,7 @@ public class Hud implements Disposable {
         endingMathHUD = new EndingMathHUD(mainGaming);
         viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
         stageHUD = new Stage(viewport, mainGaming.getBatch());
-        Gdx.input.setInputProcessor(stageHUD);
+       // Gdx.input.setInputProcessor(stageHUD);
         first = false;
         voiseOut = false;
         final float sw = mainGaming.getZk().WHIDE_SCREEN;
@@ -113,35 +113,39 @@ public class Hud implements Disposable {
         int wd = Gdx.graphics.getWidth();
         System.out.println("wd :: " +wd);
 
-        final Image attacButton = new Image(mainGaming.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("hit3t"));
+        attacButton = new Image(mainGaming.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("hit3t"));
         attacButton.setSize(200,200);
         attacButton.setPosition(wd - 300,1);
-        attacButton.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-               // attackButon = true;
-                voiseOut = true;
-                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
-                return false;
-            }
-
-
-            @Override
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-            //    attackButon = true;
-            //    voiseOut = true;
-                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
-
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-              //  attackButon = false;
-                voiseOut = false;
-                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
-            }
-
-        });
+//        attacButton.addListener(new InputListener() {
+//            @Override
+//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//               // attackButon = true;
+//                voiseOut = true;
+//                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
+//                System.out.println("CLICK !!!!!!!");
+//                return true;
+//            }
+//
+//
+////            @Override
+////            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+////            //    attackButon = true;
+////            //    voiseOut = true;
+////                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
+////                System.out.println("__________");
+////            }
+//
+//
+//
+//            @Override
+//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+//              //  attackButon = false;
+//                voiseOut = false;
+//                Gdx.app.error("voiseOut", String.valueOf(voiseOut));
+//                System.out.println("CLICKUO !!!!!!!");
+//            }
+//
+//        });
 
         font.getData().setScale(.8f);
         font.getColor().set(.5f, .5f, .5f, 1);
@@ -231,6 +235,11 @@ public class Hud implements Disposable {
         return true;
     }
 
+
+    public Image getAttacButton() {
+        return attacButton;
+    }
+
     public boolean isVoiseOut() {
         return voiseOut;
     }
@@ -247,6 +256,8 @@ public class Hud implements Disposable {
         this.liderMathLabel.setText("1st: " + max_fargs);
         this.liderMath = max_fargs;
     }
+
+
 
     public void update() {
        // voiseOut = false;

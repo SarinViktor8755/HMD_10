@@ -92,6 +92,8 @@ public class MainGaming implements Screen {
 
     @Override
     public void show() {
+
+
         Gdx.app.log("access_audio_recording", String.valueOf(zk.isAccess_audio_recording()));
         System.out.println("show MainGaming");
         System.out.println();
@@ -117,7 +119,7 @@ public class MainGaming implements Screen {
 
         if (zk.isAndroid()) {
             apInput = new AndroidInputProcessorGamePley(this);
-            Gdx.input.setInputProcessor(inputMultiplexer);
+           // Gdx.input.setInputProcessor(inputMultiplexer);
 
         }
         else {
@@ -129,12 +131,23 @@ public class MainGaming implements Screen {
 
             // Gdx.input.setCursorCatched(true);
         }
-        Gdx.input.setInputProcessor(inputMultiplexer);
+
+
 
 
         //zk.getMainGameScreen();
         hud = new Hud(this);
-        inputMultiplexer.setProcessors(hud.getStageHUD());
+        //inputMultiplexer.setProcessors(hud.getStageHUD());
+        inputMultiplexer.setProcessors(apInput);
+
+        //inputMultiplexer.setProcessors(apInput);
+
+       // Gdx.input.setInputProcessor(apInput);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+
+
+
+
         soundtrack = new SoundTrack(this);
         textureAim = getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("aim");
         this.timeInGame = 0;
@@ -145,7 +158,8 @@ public class MainGaming implements Screen {
 //        Gdx.app.error("zk ::::", String.valueOf(zk.tip));
 //        Gdx.app.error("zk ::::", String.valueOf(zk.isAccess_audio_recording()));
 
-        Gdx.input.setInputProcessor(inputMultiplexer);
+     //   Gdx.input.setInputProcessor(inputMultiplexer);
+
     }
 
     public FillViewport getViewport() {
@@ -162,6 +176,7 @@ public class MainGaming implements Screen {
             renderStartScreen.render(delta);
             mainClient.coonectToServer();
             return;
+
         }
 
 
@@ -243,6 +258,11 @@ public class MainGaming implements Screen {
 
 
     public void renderAim() { // отрисовать прицел
+        System.out.println(hud.getAttacButton().getX()+"   "+hud.getAttacButton().getY());
+        System.out.println(hud.getAttacButton().getImageHeight()+"   "+hud.getAttacButton().getImageWidth());
+        System.out.println(hud.getAttacButton().getMinHeight()+"   "+hud.getAttacButton().getMinWidth());
+        System.out.println(hud.getAttacButton().getPrefHeight()+"   "+hud.getAttacButton().getPrefWidth());
+
         this.getViewport().setWorldSize(zk.WHIDE_SCREEN+timeInGame * 10 , zk.HIDE_SCREEN + +timeInGame * 10 );
 
         if (!getHero().isLive()) return;

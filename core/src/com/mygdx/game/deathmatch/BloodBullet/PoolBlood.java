@@ -483,7 +483,7 @@ public class PoolBlood {
                 spriteBatch.setColor(1, 1, 1, .8f);
                 spriteBatch.draw(textureRegions.get(68), b.getPoition().x, b.getPoition().y, 24, 24);
                 for (int i = 0; i < b.getNumberSteps(); i++) {
-                    if (MathUtils.randomBoolean(80)) continue;
+                   // if (MathUtils.randomBoolean(80)) continue;
                     spriteBatch.draw(textureRegions.get(68), b.getPoition().x - b.getStepX() * i * 15 + MathUtils.random(-5, 5), b.getPoition().y - b.getStepY() * i * 15 + MathUtils.random(-5, 5), 10, 10);
 //                    for (int j = 0; j < ; j++) {
 //
