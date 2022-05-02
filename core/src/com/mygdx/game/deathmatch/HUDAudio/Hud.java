@@ -120,7 +120,6 @@ public class Hud implements Disposable {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                // attackButon = true;
-
                 voiseOut = true;
                 Gdx.app.error("voiseOut", String.valueOf(voiseOut));
                 return false;
@@ -130,7 +129,7 @@ public class Hud implements Disposable {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
             //    attackButon = true;
-                voiseOut = true;
+            //    voiseOut = true;
                 Gdx.app.error("voiseOut", String.valueOf(voiseOut));
 
             }
@@ -141,6 +140,7 @@ public class Hud implements Disposable {
                 voiseOut = false;
                 Gdx.app.error("voiseOut", String.valueOf(voiseOut));
             }
+
         });
 
         font.getData().setScale(.8f);

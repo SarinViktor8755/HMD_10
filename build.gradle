@@ -112,7 +112,6 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         api "com.esotericsoftware:kryonet:2.22.0-RC1"
         api 'com.google.android.gms:play-services-ads:15.0.0'
-        
     }
 }
 
