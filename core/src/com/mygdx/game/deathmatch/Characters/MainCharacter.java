@@ -668,7 +668,6 @@ public class MainCharacter extends Actor {
         if (id < 0) result = getNikNameGen(id);
         else if (id == mg.getMainClient().myIdConnect) result = mg.getZk().getMyNikName(); else result = otherPlayers.getNikName(id);
         if (result==null) return "";
-
         return result;
     }
 

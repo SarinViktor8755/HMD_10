@@ -167,7 +167,7 @@ public class Hud implements Disposable {
         table.setFillParent(true);
 
         deltaButt = Gdx.graphics.getHeight() - ZombiKiller.HIDE_SCREEN ;
-
+        table.padTop(40);
         table.add(raitingTextLabel).expandX().padTop(0);
         table.add(timerTextLabel).expandX().padTop(0);
         table.add(fragsTextLabel).expandX().padTop(0);

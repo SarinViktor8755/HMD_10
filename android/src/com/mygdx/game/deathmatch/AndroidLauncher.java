@@ -42,10 +42,10 @@ public class AndroidLauncher  extends AndroidApplication implements AdAds {
 
 		initialize(new ZombiKiller(tip,this), config);
 		////////////////////////////////////////////////////
-		MobileAds.initialize(this, "ca-app-pub-3062739183422189~2459416261");
+		MobileAds.initialize(this, "ca-app-pub-3062739183422189~2319030096");
 		mInterstitialAd = new InterstitialAd(this);
 		//mInterstitialAd.setAdUnitId("ca-app-pub-3062739183422189/6323969964");
-		mInterstitialAd.setAdUnitId("ca-app-pub-3062739183422189/4204754532"); // ta samaya reklama
+		mInterstitialAd.setAdUnitId("ca-app-pub-3062739183422189/1599925199"); //
 		//mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/5224354917"); // test
 		//ca-app-pub-3940256099942544/6300978111
 		mInterstitialAd.loadAd(new AdRequest.Builder().build());

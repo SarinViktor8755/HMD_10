@@ -111,23 +111,23 @@ public class MainGaming implements Screen {
         gHero.addActor(hero);
         batch = new SpriteBatch();
         camera = new OrthographicCamera(zk.WHIDE_SCREEN, zk.HIDE_SCREEN);
-        viewport = new FillViewport(7000   ,7000, camera);
+        viewport = new FillViewport(zk.WHIDE_SCREEN, zk.HIDE_SCREEN, camera);
 
         inputMultiplexer = new InputMultiplexer();
 
         if (zk.isAndroid()) {
-                apInput = new AndroidInputProcessorGamePley(this);
-                 Gdx.input.setInputProcessor(inputMultiplexer);
+            apInput = new AndroidInputProcessorGamePley(this);
+            Gdx.input.setInputProcessor(inputMultiplexer);
 
         }
         else {
             apInput = new DesktopInputProcessorGamePley(this);
 
-           // inputMultiplexer.setProcessors(apInput);
+            // inputMultiplexer.setProcessors(apInput);
 
 
 
-           // Gdx.input.setCursorCatched(true);
+            // Gdx.input.setCursorCatched(true);
         }
         Gdx.input.setInputProcessor(inputMultiplexer);
 
@@ -146,7 +146,7 @@ public class MainGaming implements Screen {
 //        Gdx.app.error("zk ::::", String.valueOf(zk.isAccess_audio_recording()));
 
         Gdx.input.setInputProcessor(inputMultiplexer);
-   }
+    }
 
     public FillViewport getViewport() {
         return viewport;
@@ -230,7 +230,7 @@ public class MainGaming implements Screen {
         float deltaTime = Gdx.graphics.getDeltaTime();
         //Gdx.app.log("Voise", "isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise() + " acsees "+ zk.isAccess_audio_recording());
         // This would be replaced with some sort of user input, such as pressing a button.
-       // System.out.println("isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise());
+        // System.out.println("isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise());
 ///////////////[
 
         if(zk.isAccess_audio_recording() && hud.isVoiseOut() && !mainClient.getVoiceChatClient().isInVoise()){
@@ -243,6 +243,8 @@ public class MainGaming implements Screen {
 
 
     public void renderAim() { // отрисовать прицел
+        this.getViewport().setWorldSize(zk.WHIDE_SCREEN+timeInGame * 10 , zk.HIDE_SCREEN + +timeInGame * 10 );
+
         if (!getHero().isLive()) return;
         rot.set(camera.up.x, camera.up.y);
         int l = 0;

@@ -45,7 +45,6 @@ public class MenuScreen implements Screen {
     Texture noWar;
     float a;
 
-
     //  ShaderProgram shader;
 
     boolean long_logo;

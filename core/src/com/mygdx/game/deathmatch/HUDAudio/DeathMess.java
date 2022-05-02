@@ -49,7 +49,7 @@ public class DeathMess {
     public void addMessDead(String p1) {
         Mess a = mess.pollLast();
         mess.addFirst(a);
-        a.setTimeLife(1.5f);
+        a.setTimeLife(2.5f);
         a.setMess(p1);
 
     }
