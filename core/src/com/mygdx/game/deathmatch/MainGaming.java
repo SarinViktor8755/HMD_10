@@ -137,8 +137,10 @@ public class MainGaming implements Screen {
 
         //zk.getMainGameScreen();
         hud = new Hud(this);
-        //inputMultiplexer.setProcessors(hud.getStageHUD());
+
         inputMultiplexer.setProcessors(apInput);
+       //inputMultiplexer.setProcessors(hud.getStageHUD());
+
 
         //inputMultiplexer.setProcessors(apInput);
 

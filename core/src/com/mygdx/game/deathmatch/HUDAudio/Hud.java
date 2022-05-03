@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -114,8 +115,9 @@ public class Hud implements Disposable {
         System.out.println("wd :: " +wd);
 
         attacButton = new Image(mainGaming.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("hit3t"));
-        attacButton.setSize(200,200);
-        attacButton.setPosition(wd - 300,1);
+//        attacButton.setSize(400,400);
+//        attacButton.setPosition(-88,-88);
+//        attacButton.setTouchable(Touchable.enabled);
 //        attacButton.addListener(new InputListener() {
 //            @Override
 //            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -183,7 +185,7 @@ public class Hud implements Disposable {
 
         table.add(liderMathLabel).expandX().center().padTop(12.0f);
 
-        table.setDebug(true);
+      //  table.setDebug(true);
 
       //  table2.pad(table.getMaxHeight());
 
@@ -210,10 +212,10 @@ public class Hud implements Disposable {
 //        System.out.println(table.getRowHeight(2) + "  !!");
 
         table.top(); // Will put it at the top of our stage
-        table.setFillParent(true);
+       // table.setFillParent(true);
        // table2.setFillParent(true);
         stageHUD.addActor(table);
-        stageHUD.addActor(attacButton);
+      //  stageHUD.addActor();
         stageHUD.setViewport(viewport);
 
  //

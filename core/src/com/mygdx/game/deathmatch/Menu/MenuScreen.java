@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.deathmatch.Service.NikName;
 import com.mygdx.game.deathmatch.ZombiKiller;
 
+import java.awt.Font;
 import java.io.File;
 
 public class MenuScreen implements Screen {
@@ -40,6 +41,7 @@ public class MenuScreen implements Screen {
     private float timeInScreen;
     private float timerStartGame; // переменная для анимации
     TextField textField;
+    Font textTelega;
     Skin skinMenu;
     Vector2 nap, nwPos;
     Texture noWar;
@@ -62,6 +64,8 @@ public class MenuScreen implements Screen {
 //            System.err.println(shader.getLog());
 //            System.exit(0);
 //        }
+        //textTelega.
+
         batch = new SpriteBatch();
         nwPos = new Vector2();
         nwPos.set(MathUtils.random(250), MathUtils.random(150));
