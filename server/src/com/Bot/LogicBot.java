@@ -96,11 +96,11 @@ public class LogicBot {
         try {
             int gans = getSu().indexBot.getGameServer().getSnapShots().getWeaponByPlayersID(getMyID());
             if (gans == 1)
-                actionClockCounter[4] = MathUtils.random(40 + (200 * levelBot), 180 + (200 * levelBot));
+                actionClockCounter[4] = 0.4f;
             if (gans == 2)
-                actionClockCounter[4] = MathUtils.random(110 + (200 * levelBot), 200 + (200 * levelBot));
+                actionClockCounter[4] = 0.45f;
             if (gans == 3)
-                actionClockCounter[4] = MathUtils.random(100 + (200 * levelBot), 200 + (200 * levelBot));
+                actionClockCounter[4] = .8f;
             if (gans == 1) {
                 makeHitStick();
             } else {
@@ -115,14 +115,18 @@ public class LogicBot {
     private void makeHitStick() {
         try {
             int dist = StaticService.getDistance(getSu().getPosition().x, getSu().getPosition().y, getSu().getIndexBot().getGameServer().getSnapShots().getPlaeyrToId(searchTarget).getX(), getSu().getIndexBot().getGameServer().getSnapShots().getPlaeyrToId(searchTarget).getY());
-            if ((dist > 350) && (StaticService.selectWithProbability(2 * levelBot)))
-                if ((dist < 350) && (dist > 200) && (StaticService.selectWithProbability(10 * levelBot)))
-                    getSu().makeHit();
-            if ((dist < 200) && (dist > 110) && (StaticService.selectWithProbability(65 * levelBot)))
+//            if ((dist > 350) && (StaticService.selectWithProbability(2 * levelBot)))
+//                if ((dist < 350) && (dist > 200) && (StaticService.selectWithProbability(10 * levelBot)))
+//                    getSu().makeHit();
+//            if ((dist < 200) && (dist > 110) && (StaticService.selectWithProbability(65 * levelBot)))
+//                getSu().makeHit();
+//            if ((dist < 110) && (StaticService.selectWithProbability(90 * levelBot)))
+//                getSu().makeHit();
+//            if (getSu().getVelocity().len() < 10) getSu().getAcceleration().set(1, 1);
+            if(MathUtils.randomBoolean(
+                    MathUtils.map(0,350,0,1,dist) *1.3f
+            ))
                 getSu().makeHit();
-            if ((dist < 110) && (StaticService.selectWithProbability(90 * levelBot)))
-                getSu().makeHit();
-            if (getSu().getVelocity().len() < 10) getSu().getAcceleration().set(1, 1);
             Vector2 a = new Vector2(getSu().getIndexBot().getGameServer().getSnapShots().getPlaeyrToId(searchTarget).getX(), getSu().getIndexBot().getGameServer().getSnapShots().getPlaeyrToId(searchTarget).getY());
             //getSu().getCookAngle().setAngle(a.cpy().sub(getSu().getPosition().cpy()).angle() - MathUtils.random(-60, 60));
             getSu().getAcceleration().setAngle(a.cpy().sub(getSu().getPosition().cpy()).angle() - MathUtils.random(-5, 5));
@@ -174,16 +178,18 @@ public class LogicBot {
     }
 
     public void disconectWhereGo() {
-        float delta = MathUtils.random(1000, 4000) * (1.3f * levelBot);
+       // float delta = MathUtils.random(1000, 4000) * (1.3f * levelBot);
         Vector2 rn = new Vector2(MathUtils.random(-100, 100), MathUtils.random(-100, 100));
         rn.nor().scl(10000, 1000);
         //System.out.println("RM   " + rn);
-        getSu().getAcceleration().set(rn).rotateRad(MathUtils.random(-3, 3));
-        if (StaticService.selectWithProbability(15)) {
+        getSu().getAcceleration().set(rn).rotateDeg(MathUtils.random(-.1f, .1f)); // вроде вопрот бота
+
+
+                if (MathUtils.randomBoolean(0.02f)) { // притормазить
             getSu().getAcceleration().setZero();
-            actionClockCounter[0] = MathUtils.random(200 * (2 - levelBot), 1000 * (2 - levelBot));
+            actionClockCounter[0] = MathUtils.random(.3f,.7f);
         }
-        if (StaticService.selectWithProbability(25)) getSu().getAcceleration().scl(.03f);
+        if (MathUtils.randomBoolean(.25f)) getSu().getAcceleration().scl(.03f);
     }
 /////////////////////////////////////////////
 

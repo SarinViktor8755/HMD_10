@@ -68,7 +68,7 @@ public class AnimatonBody {
         this.animationBodyFreme.add(new AnimationBodyFreme(.05f, 4));
         this.animationBodyFreme.add(new AnimationBodyFreme(.05f, 5, true));
         this.animationBodyFreme.add(new AnimationBodyFreme(.3f, 1));
-
+        // 05
     }
 
     public void addAnimationAttackPistols() {
@@ -76,6 +76,7 @@ public class AnimatonBody {
         this.animationBodyFreme.add(new AnimationBodyFreme(.06f, 2));
         this.animationBodyFreme.add(new AnimationBodyFreme(.09f, 3));
         this.animationBodyFreme.add(new AnimationBodyFreme(.3f, 1));
+        /// .45
     }
 
     public void addAnimationAttackShotgun() {
@@ -84,6 +85,8 @@ public class AnimatonBody {
         this.animationBodyFreme.add(new AnimationBodyFreme(.35f, 1));
         this.animationBodyFreme.add(new AnimationBodyFreme(.3f, 3));
         this.animationBodyFreme.add(new AnimationBodyFreme(.1f, 1));
+
+        /// .8f
     }
 
     public int getNomberanimation() {
