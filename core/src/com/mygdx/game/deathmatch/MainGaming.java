@@ -251,9 +251,9 @@ public class MainGaming implements Screen {
         // This would be replaced with some sort of user input, such as pressing a button.
         // System.out.println("isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise());
 ///////////////[
-
-        if(zk.isAccess_audio_recording() && hud.isVoiseOut() && !mainClient.getVoiceChatClient().isInVoise()){
-//            if(MathUtils.randomBoolean())System.out.println("VOISE OUT> >"); else System.out.println("VOISE > OUT");
+        System.out.println(apInput.isVoice());
+        if(zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()){
+            if(MathUtils.randomBoolean())System.out.println("VOISE OUT> >"); else System.out.println("VOISE > OUT");
 //            // Sends audio data to the server.
             mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
         }}

@@ -2,6 +2,7 @@ package com.mygdx.game.deathmatch.Ip;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.deathmatch.MainGaming;
 
@@ -262,6 +263,6 @@ public class DesktopInputProcessorGamePley implements InputProc {
 
     @Override
     public boolean isVoice() {
-        return voceChat;
+        return true;
     }
 }

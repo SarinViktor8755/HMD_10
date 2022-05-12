@@ -165,7 +165,7 @@ public class VoiceChatClient implements Disposable{
 		server.addListener(new Listener(){
 			public void received(Connection connection, Object object) {
 				if(object instanceof VoiceNetData){
-					
+
 					// Read data
 					VoiceNetData message = (VoiceNetData)object;					
 					final short[] data = message.getData();
@@ -223,6 +223,7 @@ public class VoiceChatClient implements Disposable{
 					// Send to server, this will not block but may affect networking...
 					client.sendUDP(new VoiceNetData(data));
 					ready = true;
+
 				}
 			});
 			thread.start();			
