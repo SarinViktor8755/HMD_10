@@ -12,7 +12,7 @@ import com.mygdx.game.deathmatch.Service.OperationVector;
 public class AndroidInputProcessorGamePley implements InputProc {
     private MainGaming mg;
 
-    private PositionDelta mov, rotation;
+    private PositionDelta mov, rotation , voiseTuath;
     private int centor;
     private int centorHide;
     private float kefLeftSide;
@@ -30,6 +30,7 @@ public class AndroidInputProcessorGamePley implements InputProc {
         voiseOut = false;
         mov = new PositionDelta();
         rotation = new PositionDelta();
+        voiseTuath = new PositionDelta();
 //        centor = Gdx.app.getGraphics().getWidth() / 2;
 //        kefLeftSide = Gdx.app.getGraphics().getWidth() / 720;
         centor = Gdx.app.getGraphics().getWidth() / 2;
@@ -66,8 +67,12 @@ public class AndroidInputProcessorGamePley implements InputProc {
         // this.tuachScreen = true;
         if (x < centor && (!mov.isActiv())) {
             //Gdx.app.error("MyTag", "!ПЕРЕДВИЖЕНИЕ " + pointer);
-            if(y < centorHide) voiseOut = true; else {// голос
-                mov.setPointer(pointer); // движение
+            if(y < centorHide) {// голос
+                voiseOut = true;
+                voiseTuath.setPointer(pointer);
+                voiseTuath.setStartPositionXY(x, y);
+            }else {// движение
+                mov.setPointer(pointer);
                 mov.setStartPositionXY(x, y);
             }
             return false;
@@ -102,7 +107,11 @@ public class AndroidInputProcessorGamePley implements InputProc {
         if (pointer == mov.getPointer()) {
             OperationVector.setTemp_vector(((mov.getStartPosition().x - x)) * -1, ((mov.getStartPosition().y - y)));
             movePers(OperationVector.get_Setter_Temp_vector());
+            return false;
+        }
 
+        if (pointer == voiseTuath.getPointer()) {
+            voiseTuath.setStartPositionXY(x, y);
             return false;
         }
         return true;
@@ -114,12 +123,14 @@ public class AndroidInputProcessorGamePley implements InputProc {
         // this.tuachScreen = true;
         if (pointer == mov.getPointer()) {
             mov.setPointer(-1);
-            voiseOut = false;
+
             //Gdx.app.error("MyTag", "ПЕРЕДВИЖЕНИЕ !! " + pointer);
         } else if (pointer == rotation.getPointer()) {
             rotation.setPointer(-1);
             setDubleClickTimer(tacktBubleClick);
             //Gdx.app.error("MyTag", "ВРАЩЕНИЕ !! " + pointer);
+        }else if(pointer == voiseTuath.getPointer()){
+            voiseTuath.setPointer(-1);
         }
         return true;
     }
@@ -201,6 +212,7 @@ public class AndroidInputProcessorGamePley implements InputProc {
     @Override
     public boolean isVoice() {
         Gdx.app.error("MyTag", "GOLOS " + this.voiseOut);
-        return voiseOut;
+        if(voiseTuath.getPointer() == -1) return false;
+        return true;
     }
 }
