@@ -7,10 +7,12 @@ import com.badlogic.gdx.math.MathUtils;
 public class MusicGame {
     private Music music;
     private int id_music;
+    private int counVice;
 
     public MusicGame() {
         if (Gdx.files.internal("audio/music.ogg").exists())
             music = Gdx.audio.newMusic(Gdx.files.internal("audio/music.ogg"));
+        counVice = 50;
     }
 
     public void pleyMusic() {
@@ -27,10 +29,13 @@ public class MusicGame {
     public void muteOut(boolean down) { // приглушаем музыку для воис чата
         if (down) {
             music.stop();
+            counVice = 0;
 
         } else {
-            music.play();
 
+            if (counVice > 50) music.play();
+            counVice++;
+            System.out.println(counVice);
         }
         music.setVolume(MathUtils.clamp(music.getVolume(), 20, 100));
     }

@@ -258,7 +258,6 @@ public class MainGaming implements Screen {
             mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
         }
 
-
     }
 
 
