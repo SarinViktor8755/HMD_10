@@ -32,6 +32,7 @@ import com.mygdx.game.deathmatch.Ip.InputProc;
 import com.mygdx.game.deathmatch.LoadingScreen.StartScreen;
 import com.mygdx.game.deathmatch.Particles.ParticleCustum;
 import com.mygdx.game.deathmatch.RenderStartScreen;
+import com.mygdx.game.deathmatch.Service.NikName;
 import com.mygdx.game.deathmatch.SpaceMap.IndexMap;
 import com.mygdx.game.deathmatch.Service.OperationVector;
 import com.mygdx.game.deathmatch.ZombiKiller;
@@ -110,6 +111,7 @@ public class MainGaming implements Screen {
         this.indexMap = new IndexMap(this);
         this.hero = new MainCharacter(this);
         this.gHero = new Group();
+        this.hero.setNikNameplayer(NikName.getNikName());
         gHero.addActor(hero);
         batch = new SpriteBatch();
         camera = new OrthographicCamera(zk.WHIDE_SCREEN, zk.HIDE_SCREEN);
@@ -260,10 +262,10 @@ public class MainGaming implements Screen {
 
 
     public void renderAim() { // отрисовать прицел
-        System.out.println(hud.getAttacButton().getX()+"   "+hud.getAttacButton().getY());
-        System.out.println(hud.getAttacButton().getImageHeight()+"   "+hud.getAttacButton().getImageWidth());
-        System.out.println(hud.getAttacButton().getMinHeight()+"   "+hud.getAttacButton().getMinWidth());
-        System.out.println(hud.getAttacButton().getPrefHeight()+"   "+hud.getAttacButton().getPrefWidth());
+//        System.out.println(hud.getAttacButton().getX()+"   "+hud.getAttacButton().getY());
+//        System.out.println(hud.getAttacButton().getImageHeight()+"   "+hud.getAttacButton().getImageWidth());
+//        System.out.println(hud.getAttacButton().getMinHeight()+"   "+hud.getAttacButton().getMinWidth());
+//        System.out.println(hud.getAttacButton().getPrefHeight()+"   "+hud.getAttacButton().getPrefWidth());
 
         this.getViewport().setWorldSize(zk.WHIDE_SCREEN+timeInGame * 10 , zk.HIDE_SCREEN + +timeInGame * 10 );
 

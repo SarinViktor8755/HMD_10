@@ -166,7 +166,6 @@ public class AudioEngine {
         distanc = distanc / 3000;
         //System.out.println(distanc);
         if (distanc < 0) return;
-        ;
         long id = sound.play();
         sound.setPitch(id, MathUtils.random(.8f, 1.2f));
         sound.setVolume(id, distanc);

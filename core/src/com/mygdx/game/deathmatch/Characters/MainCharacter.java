@@ -66,6 +66,7 @@ public class MainCharacter extends Actor {
     private B2lights lith;
 
     private HashMap<String, Integer> dk;
+    private String nikNameplayer;
 
 
     private float globalAlpha;
@@ -87,6 +88,8 @@ public class MainCharacter extends Actor {
         if (live == false) deathValleyTime = 1.5f;
         this.live = live;
     }
+
+
 
     public MainCharacter(MainGaming mg) {
         this.createDk();
@@ -121,7 +124,6 @@ public class MainCharacter extends Actor {
         textFont.setUseIntegerPositions(true);
 
 
-
     }
 
     private void createDk() {
@@ -154,9 +156,17 @@ public class MainCharacter extends Actor {
         return globalAlpha;
     }
 
+    public String getNikNameplayer() {
+        return nikNameplayer;
+    }
+
+    public void setNikNameplayer(String nikNameplayer) {
+        this.nikNameplayer = nikNameplayer;
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
-      //  System.out.println(NikName.getTokken() + "   --");
+        //  System.out.println(NikName.getTokken() + "   --");
         //System.out.println(getMyColorAndGenerate());
         //System.out.println(position.x+" :: "+ position.y);
         globalAlpha = MathUtils.sinDeg(mg.getHud().getTimer() / 20);
@@ -209,13 +219,13 @@ public class MainCharacter extends Actor {
             //if(MathUtils.randomBoolean(.005f))mg.getParticleCustum().addPasricalDeath_little(200,200,3);
 
 
-          //  if(MathUtils.randomBoolean(.005f)){particleCustum.}
+            //  if(MathUtils.randomBoolean(.005f)){particleCustum.}
             //mg.getIndexMap().renderFakePerspektiveLaier();
             // mg.getAssetsManagerGame().getProgress();
             // Gdx.app.log("Asset  ", String.valueOf(mg.getAssetsManagerGame().getProgress()));
             helperScreen.updateHelper();
-          //  System.out.println(position.x+"  " +position.y);
-            mg.getParticleCustum().render(mg.getBatch(),Gdx.graphics.getDeltaTime());
+            //  System.out.println(position.x+"  " +position.y);
+            mg.getParticleCustum().render(mg.getBatch(), Gdx.graphics.getDeltaTime());
         } catch (NullPointerException e) {
         }
     }
@@ -276,8 +286,7 @@ public class MainCharacter extends Actor {
 
         if (weapons.getWeapon() == 1) lith.setLasetOn(false);
         else lith.setLasetOn(true);
-        if(isLive()) lith.setLasetOn(false);
-
+        if (isLive()) lith.setLasetOn(false);
 
 
 //        if (velocity.len2() > 250000)шаги
@@ -523,7 +532,7 @@ public class MainCharacter extends Actor {
             //exception.printStackTrace();
         }
         mg.getBatch().setColor(1, 1, 1, 1);
-       // randerNikNameOtherPlayers(mg.getBatch());
+        // randerNikNameOtherPlayers(mg.getBatch());
 
     }
 
@@ -663,11 +672,11 @@ public class MainCharacter extends Actor {
     }
 
 
-    public String getMyNikNamePlayer(int id) {
-        String result = "";
+    public String getMyNikNamePlayer(int id) {  // взять ник любого игрока
+        String result = mg.getHero().getNikNameplayer();
         if (id < 0) result = getNikNameGen(id);
-        else if (id == mg.getMainClient().myIdConnect) result = mg.getZk().getMyNikName(); else result = otherPlayers.getNikName(id);
-        if (result==null) return "";
+        else result = otherPlayers.getNikName(id);
+        if (result == null) return "";
         return result;
     }
 
