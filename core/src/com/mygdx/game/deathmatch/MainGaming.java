@@ -25,8 +25,9 @@ import com.mygdx.game.deathmatch.ClientNetWork.MainClient;
 import com.mygdx.game.deathmatch.HUDAudio.AudioEngine;
 import com.mygdx.game.deathmatch.HUDAudio.Hud;
 import com.mygdx.game.deathmatch.HUDAudio.SoundTrack;
-import com.mygdx.game.deathmatch.Ip.AndroidInputProcessorGamePley;
 
+
+import com.mygdx.game.deathmatch.Ip.AndroidInputProcessorGamePley;
 import com.mygdx.game.deathmatch.Ip.DesktopInputProcessorGamePley;
 import com.mygdx.game.deathmatch.Ip.InputProc;
 import com.mygdx.game.deathmatch.LoadingScreen.StartScreen;
@@ -93,8 +94,6 @@ public class MainGaming implements Screen {
 
     @Override
     public void show() {
-
-
         Gdx.app.log("access_audio_recording", String.valueOf(zk.isAccess_audio_recording()));
         System.out.println("show MainGaming");
         System.out.println();
@@ -114,7 +113,7 @@ public class MainGaming implements Screen {
         this.hero.setNikNameplayer(NikName.getNikName());
         gHero.addActor(hero);
         batch = new SpriteBatch();
-        camera = new OrthographicCamera(zk.WHIDE_SCREEN, zk.HIDE_SCREEN);
+        camera = new OrthographicCamera();
         viewport = new FillViewport(zk.WHIDE_SCREEN, zk.HIDE_SCREEN, camera);
 
         inputMultiplexer = new InputMultiplexer();

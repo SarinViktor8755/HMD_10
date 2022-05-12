@@ -154,7 +154,6 @@ public class AudioEngine {
 
     public void pleySoundFailureRound(int distance) {
 
-
     }
 
     public void playTrampFeet(int xEvents, int yEvents) {  // звуктопот ног

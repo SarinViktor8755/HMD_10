@@ -7,6 +7,8 @@ import com.badlogic.gdx.InputProcessor;
  */
 
 public interface InputProc extends InputProcessor {
+    boolean scrolled(int amount);
+
     boolean isMove();
     public void act(float deltTime);
     boolean isTuach();

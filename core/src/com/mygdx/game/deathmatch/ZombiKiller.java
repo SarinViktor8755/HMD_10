@@ -167,11 +167,11 @@ public class ZombiKiller extends Game {
 	}
 
 	public void getMainGaming(boolean setGame) {
-		System.out.println("create New Game1");
+	//	System.out.println("create New Game1");
 		if (this.pauseScreen != null) this.pauseScreen.dispose();
-		System.out.println("create New Game2");
+	//	System.out.println("create New Game2");
 		this.mGaming = new MainGaming(this);
-		System.out.println("create New Game3");
+	//	System.out.println("create New Game3");
 	}
 
 

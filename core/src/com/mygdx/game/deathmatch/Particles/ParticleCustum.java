@@ -31,7 +31,7 @@ public class ParticleCustum {
         for (Explosion_Death ed : explosion_Death_little) {
             if (!ed.isLife()) continue;
             ed.update(deltaTime);
-            System.out.println(ed);
+          //  System.out.println(ed);
 
             /////////////////
             TextureAtlas.AtlasRegion tex = textureAtlasDeathExplosion.findRegion(ed.getNameTextureRegion());

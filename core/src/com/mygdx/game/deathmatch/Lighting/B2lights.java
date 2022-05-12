@@ -39,7 +39,7 @@ public class B2lights {
         lasetOn = true;
         //Gdx.app.log("Gdx version", com.badlogic.gdx.Version.VERSION);
         this.world = mg.getWorld();
-        pointLightsList = new ArrayList<PointLight>();
+        pointLightsList = new ArrayList<>();
         RayHandler.useDiffuseLight(true);
         this.rayHandlerHero = new RayHandler(this.world);
         object = new ObFromLight(this.world); // припятсвия
@@ -112,7 +112,6 @@ public class B2lights {
     public void renderLights(OrthographicCamera camera) {
         rayHandlerHero.setCombinedMatrix(camera);
         rayHandlerHero.updateAndRender();
-
     }
 
     public boolean isLasetOn() {

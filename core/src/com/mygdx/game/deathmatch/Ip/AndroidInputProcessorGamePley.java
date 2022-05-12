@@ -1,7 +1,6 @@
 package com.mygdx.game.deathmatch.Ip;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.deathmatch.MainGaming;
 import com.mygdx.game.deathmatch.Service.OperationVector;
@@ -19,6 +18,7 @@ public class AndroidInputProcessorGamePley implements InputProc {
 
     private final float tacktBubleClick = .25f; // это время за которе должно прозойти двойное нажатие
     private float dubleClickTimer = 0; // счетчик на двойное нажатие
+
     private boolean tuachScreen = false;
 
 
@@ -57,7 +57,7 @@ public class AndroidInputProcessorGamePley implements InputProc {
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-       // this.tuachScreen = true;
+        // this.tuachScreen = true;
         if (x < centor && (!mov.isActiv())) {
             //Gdx.app.error("MyTag", "!ПЕРЕДВИЖЕНИЕ " + pointer);
             mov.setPointer(pointer);
@@ -103,7 +103,7 @@ public class AndroidInputProcessorGamePley implements InputProc {
 
     @Override
     public boolean touchUp(int x, int y, int pointer, int button) {
-       // this.tuachScreen = true;
+        // this.tuachScreen = true;
         if (pointer == mov.getPointer()) {
             mov.setPointer(-1);
             //Gdx.app.error("MyTag", "ПЕРЕДВИЖЕНИЕ !! " + pointer);
@@ -125,6 +125,11 @@ public class AndroidInputProcessorGamePley implements InputProc {
         return false;
     }
 
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
+    }
 
     ///////////////////
     private void movePers(float deltaX, float deltaY) {
@@ -186,10 +191,6 @@ public class AndroidInputProcessorGamePley implements InputProc {
 
     @Override
     public boolean isVoice() {
-        return MathUtils.randomBoolean();
+        return true;
     }
-
-
-
-
 }
