@@ -37,7 +37,7 @@ public class DesktopInputProcessorGamePley implements InputProc {
 
     @Override
     public boolean keyUp(int keycode) {
-
+      //  System.out.println(keycode);
         if (keycode == 50) {
             voceChat = false;
         }
@@ -263,6 +263,6 @@ public class DesktopInputProcessorGamePley implements InputProc {
 
     @Override
     public boolean isVoice() {
-        return true;
+        return voceChat;
     }
 }

@@ -101,7 +101,7 @@ public class MainGaming implements Screen {
         this.startScreen = new StartScreen(zk);
 
         setAssetsManagerGame(AssetsManagerGame.loadAllAsset(getAssetsManagerGame()));
-        this.particleCustum = new ParticleCustum(getAssetsManagerGame().get("de/de.pack", TextureAtlas.class));
+        //  this.particleCustum = new ParticleCustum(getAssetsManagerGame().get("de/de.pack", TextureAtlas.class));
 
 
         this.audioEngine = new AudioEngine(this);
@@ -120,35 +120,29 @@ public class MainGaming implements Screen {
 
         if (zk.isAndroid()) {
             apInput = new AndroidInputProcessorGamePley(this);
-           // Gdx.input.setInputProcessor(inputMultiplexer);
+            // Gdx.input.setInputProcessor(inputMultiplexer);
 
-        }
-        else {
+        } else {
             apInput = new DesktopInputProcessorGamePley(this);
 
             // inputMultiplexer.setProcessors(apInput);
-
 
 
             // Gdx.input.setCursorCatched(true);
         }
 
 
-
-
         //zk.getMainGameScreen();
         hud = new Hud(this);
 
         inputMultiplexer.setProcessors(apInput);
-       //inputMultiplexer.setProcessors(hud.getStageHUD());
+        //inputMultiplexer.setProcessors(hud.getStageHUD());
 
 
         //inputMultiplexer.setProcessors(apInput);
 
-       // Gdx.input.setInputProcessor(apInput);
+        // Gdx.input.setInputProcessor(apInput);
         Gdx.input.setInputProcessor(inputMultiplexer);
-
-
 
 
         soundtrack = new SoundTrack(this);
@@ -161,7 +155,7 @@ public class MainGaming implements Screen {
 //        Gdx.app.error("zk ::::", String.valueOf(zk.tip));
 //        Gdx.app.error("zk ::::", String.valueOf(zk.isAccess_audio_recording()));
 
-     //   Gdx.input.setInputProcessor(inputMultiplexer);
+        //   Gdx.input.setInputProcessor(inputMultiplexer);
 
     }
 
@@ -250,14 +244,25 @@ public class MainGaming implements Screen {
         // This would be replaced with some sort of user input, such as pressing a button.
         // System.out.println("isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise());
 ///////////////[
-        System.out.println(apInput.isVoice());
-        if(zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()){
-            if(MathUtils.randomBoolean())System.out.println("VOISE OUT> >"); else System.out.println("VOISE > OUT");
+        //System.out.println(apInput.isVoice());
+        if (mainClient.getVoiceChatClient().isInVoise() || apInput.isVoice())
+            audioEngine.musicGame.muteOut(true);
+        else audioEngine.musicGame.muteOut(false);
+
+        if (zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()) {
+            if (MathUtils.randomBoolean()) System.out.println("VOISE OUT> >");
+            else System.out.println("VOISE > OUT");
+            // audioEngine.musicGame.muteOut(true);
+            System.out.println("!!!!!!!!!!");
 //            // Sends audio data to the server.
             mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
-        }}
-/////////////////
+        }
 
+
+    }
+
+
+/////////////////
 
 
     public void renderAim() { // отрисовать прицел
@@ -266,7 +271,7 @@ public class MainGaming implements Screen {
 //        System.out.println(hud.getAttacButton().getMinHeight()+"   "+hud.getAttacButton().getMinWidth());
 //        System.out.println(hud.getAttacButton().getPrefHeight()+"   "+hud.getAttacButton().getPrefWidth());
 
-        this.getViewport().setWorldSize(zk.WHIDE_SCREEN+timeInGame * 10 , zk.HIDE_SCREEN + +timeInGame * 10 );
+        this.getViewport().setWorldSize(zk.WHIDE_SCREEN + timeInGame * 10, zk.HIDE_SCREEN + +timeInGame * 10);
 
         if (!getHero().isLive()) return;
         rot.set(camera.up.x, camera.up.y);

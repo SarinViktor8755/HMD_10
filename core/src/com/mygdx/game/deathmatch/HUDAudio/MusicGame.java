@@ -15,7 +15,7 @@ public class MusicGame {
 
     public void pleyMusic() {
         this.music.play();
-        this.music.setVolume(100);
+        this.music.setVolume(1);
         this.music.setLooping(true);
     }
 
@@ -24,11 +24,13 @@ public class MusicGame {
         this.music.setVolume(0);
     }
 
-    public void muteOut(boolean down, float dTime) { // приглушаем музыку для воис чата
+    public void muteOut(boolean down) { // приглушаем музыку для воис чата
         if (down) {
-            music.setVolume(music.getVolume() - (dTime * 1000));
+            music.stop();
+
         } else {
-            music.setVolume(music.getVolume() + (dTime * 1000));
+            music.play();
+
         }
         music.setVolume(MathUtils.clamp(music.getVolume(), 20, 100));
     }

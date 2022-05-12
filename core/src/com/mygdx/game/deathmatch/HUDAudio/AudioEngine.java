@@ -173,7 +173,7 @@ public class AudioEngine {
 
     //////////////////////////////////////////////////////////
     public void act(float dt) {
-        musicGame.muteOut(getInVoise(),dt); // проверка и приглушения звука от голоса )) - надо провреить как работает
+      //  musicGame.muteOut(getInVoise(),dt); // проверка и приглушения звука от голоса )) - надо провреить как работает
         Iterator<Map.Entry<Integer, Float>> entries = this.stepCounter.entrySet().iterator();
         cleanStepCounter(dt);
         //System.out.println(this.getStepCounter());
