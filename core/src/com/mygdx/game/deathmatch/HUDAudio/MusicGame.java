@@ -33,9 +33,9 @@ public class MusicGame {
 
         } else {
 
-            if (counVice > 50) music.play();
+            if (counVice > 15) music.play();
             counVice++;
-            System.out.println(counVice);
+           // System.out.println(counVice);
         }
         music.setVolume(MathUtils.clamp(music.getVolume(), 20, 100));
     }

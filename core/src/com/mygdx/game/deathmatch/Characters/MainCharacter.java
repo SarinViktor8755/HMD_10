@@ -537,14 +537,17 @@ public class MainCharacter extends Actor {
                   //  System.out.println(mg.getMainClient().getVoiceChatClient().nVoiseID + " !!! " + key);
 
 
-                  if  (mg.getMainClient().getVoiceChatClient().nVoiseID == key) // динамик
+                  if  (mg.getMainClient().getVoiceChatClient().nVoiseID == key){ // динамик
                     mg.getBatch().draw(microphone,
                             (xz - 125), (yz - 125),
                             125, 125,
                             250, 250,
                             0.5f, 0.5f,
                             OperationVector.getTemp_vector().angleDeg() + 90
-                    ); // mask
+                    );
+                  mg.getHud().setTextlabelNvoise(otherPlayers.getNikName(key));
+
+                  }// mask
 
                    // ник
 

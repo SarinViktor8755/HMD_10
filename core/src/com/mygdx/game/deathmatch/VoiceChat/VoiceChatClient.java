@@ -126,16 +126,17 @@ public class VoiceChatClient implements Disposable{
 				inVoise = false;
 				// Only read objects of the correct type.
 				if(object instanceof VoiceNetData){
-					//System.out.println("<<--- IN VOISE");
+
 
 					inVoise = true;
 					// Read data
-					VoiceNetData message = (VoiceNetData)object;					
+					VoiceNetData message = (VoiceNetData)object;
+					System.out.println("<<--- IN VOISE  " + message.getId());
 					short[] data = message.getData();
-					
+
 					// Play audio
 					processAudio(data, connection, message);
-					System.out.println("!!::: ___  "+ nVoiseID);
+					//System.out.println("!!::: ___  "+ nVoiseID);
 
 					nVoiseID = message.getId();
 
@@ -201,7 +202,7 @@ public class VoiceChatClient implements Disposable{
 	 * If this method is called 60 times per second, this value should be (1/60). In LibGDX, use <code>Gdx.graphics.getDeltaTime()</code>.
 	 */
 	public void sendVoice(final Client client, float delta){
-		
+		System.out.println(client.getID());
 		float interval = 1f / this.getSendRate();
 		timer += delta;
 		if(timer >= interval){

@@ -42,8 +42,10 @@ public class VoiceChatServer {
 	 */
 	public boolean relayVoice(Connection connection, Object message, Server server){
 		if(message instanceof VoiceNetData){
-			((VoiceNetData) message).setId(connection.getID());
-			server.sendToAllExceptUDP(connection.getID(), message);
+			System.out.println(connection.getID() + "  ID");
+			VoiceNetData vnd = (VoiceNetData) message;
+			vnd.setId(connection.getID());
+			server.sendToAllExceptUDP(connection.getID(), vnd);
 			return true;
 		}else{
 			return false;

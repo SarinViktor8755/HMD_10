@@ -49,13 +49,15 @@ public class Hud implements Disposable {
     int deltaButt;
 
 
-    final Image attacButton;
+    //final Image attacButton;
     Label coinCountLabel;
     Label raitingTextLabel; // 1/3
     Label fragsTextLabel;
     Label timerTextLabel;
     Label liderMathLabel;
     Label notConnectLabel;
+    Label labelNikNameVChat;
+
 
     Label declaration_death1;
     Label declaration_death2;
@@ -107,12 +109,13 @@ public class Hud implements Disposable {
         declaration_death1 = new Label("", style);
         declaration_death2 = new Label("", style);
         declaration_death3 = new Label("", style);
+        labelNikNameVChat = new Label("", style);
 
         deathMess = new DeathMess(declaration_death1, declaration_death2, declaration_death3);
         int wd = Gdx.graphics.getWidth();
-        System.out.println("wd :: " +wd);
+     //   System.out.println("wd :: " +wd);
 
-        attacButton = new Image(mainGaming.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("hit3t"));
+     //   attacButton = new Image(mainGaming.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("hit3t"));
 //        attacButton.setSize(400,400);
 //        attacButton.setPosition(-88,-88);
 //        attacButton.setTouchable(Touchable.enabled);
@@ -178,7 +181,7 @@ public class Hud implements Disposable {
 
         table.row();
 
-        table.add();
+        table.add(labelNikNameVChat);
         table.add(table2);
 
         table.add(liderMathLabel).expandX().center().padTop(12.0f);
@@ -236,10 +239,6 @@ public class Hud implements Disposable {
     }
 
 
-    public Image getAttacButton() {
-        return attacButton;
-    }
-
     public boolean isVoiseOut() {
         return voiseOut;
     }
@@ -283,6 +282,9 @@ public class Hud implements Disposable {
     }
 
     public void update(float delta) {
+
+
+
 
         //////////////////////////
         this.timer = (int) (this.timer - (delta * 1000));
@@ -333,5 +335,9 @@ public class Hud implements Disposable {
 
     public int getMyPosition() {
         return myPosition;
+    }
+
+    public void setTextlabelNvoise(String nik){
+        this.labelNikNameVChat.setText(nik);
     }
 }

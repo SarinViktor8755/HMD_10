@@ -96,7 +96,7 @@ public class MainGaming implements Screen {
     public void show() {
         Gdx.app.log("access_audio_recording", String.valueOf(zk.isAccess_audio_recording()));
         System.out.println("show MainGaming");
-        System.out.println();
+       // System.out.println();
         rot = new Vector2();
         this.startScreen = new StartScreen(zk);
 
@@ -169,6 +169,7 @@ public class MainGaming implements Screen {
 
     @Override
     public void render(float delta) {
+
         if (!mainClient.isConnectToServer()) {
             renderStartScreen.render(delta);
             mainClient.coonectToServer();
@@ -218,7 +219,7 @@ public class MainGaming implements Screen {
         soundtrack.ubdate(dt);
         hud.render(dt);
         this.timeInGame += delta;
-        muteMusic(delta);
+
 
         getBatch().begin();
         getHero().getPoolBlood().renderAd(getBatch());
@@ -241,6 +242,7 @@ public class MainGaming implements Screen {
         // LibGDX has done this for you!
         ;
         float deltaTime = Gdx.graphics.getDeltaTime();
+
         //Gdx.app.log("Voise", "isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise() + " acsees "+ zk.isAccess_audio_recording());
         // This would be replaced with some sort of user input, such as pressing a button.
         // System.out.println("isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise());
@@ -249,11 +251,11 @@ public class MainGaming implements Screen {
 
 
         getHero().setVoiseNomer(getMainClient().getVoiceChatClient().nVoiseID);
-
+        muteSound(deltaTime);
 
     }
 
-    private void muteMusic(float drltaTime){}
+
 
 
 /////////////////
@@ -265,14 +267,12 @@ public class MainGaming implements Screen {
         else {
             audioEngine.musicGame.muteOut(false);
             getHero().setVoiseNomer(Integer.MIN_VALUE);
+            getMainClient().getVoiceChatClient().nVoiseID = Integer.MIN_VALUE;
         }
 
         if (zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()) {
-//            if (MathUtils.randomBoolean()) System.out.println("VOISE OUT> >");
-//            else System.out.println("VOISE > OUT");
-            // audioEngine.musicGame.muteOut(true);
-            //         System.out.println("!!!!!!!!!!");
-//            // Sends audio data to the server.
+           // if (MathUtils.randomBoolean()) System.out.println("VOISE OUT> >");
+          //  else System.out.println("VOISE > OUT ");
             mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
         }
 
