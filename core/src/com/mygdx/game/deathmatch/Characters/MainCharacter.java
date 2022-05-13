@@ -22,6 +22,7 @@ import com.mygdx.game.deathmatch.Service.Key_cod;
 import com.mygdx.game.deathmatch.Service.NikName;
 import com.mygdx.game.deathmatch.Service.OperationVector;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class MainCharacter extends Actor {
 
     AnimationPers animationPers;
 
+    private int voiseNomer; // номер игрока который говорит
 
     private Vector2 cookAngle; // навправление тела
     private Vector2 acceleration; // навправление движения
@@ -53,6 +55,7 @@ public class MainCharacter extends Actor {
     private HelperScreen helperScreen;
 
     private BitmapFont textFont;
+    private TextureRegion microphone;
 
     public Color getMyColorGelet() {
         return myColorGelet;
@@ -89,9 +92,16 @@ public class MainCharacter extends Actor {
         this.live = live;
     }
 
+    public int getVoiseNomer() {
+        return voiseNomer;
+    }
 
+    public void setVoiseNomer(int voiseNomer) {
+        this.voiseNomer = voiseNomer;
+    }
 
     public MainCharacter(MainGaming mg) {
+        this.voiseNomer = Integer.MIN_VALUE;
         this.createDk();
         this.mg = mg;
         this.position = new Vector2(0, 0);
@@ -115,6 +125,7 @@ public class MainCharacter extends Actor {
         for (int i = 1; i < 6; i++) {
             this.maksTexture.add(mg.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("mask" + i));
         }
+        microphone = mg.getAssetsManagerGame().get("character/character", TextureAtlas.class).findRegion("microphone1");
         this.helperScreen = new HelperScreen(this.mg);
 
         lith = new B2lights(mg);
@@ -520,6 +531,31 @@ public class MainCharacter extends Actor {
                                 125, 125,
                                 250, 250,
                                 1.375f, 1.375f, mg.getHero().getOtherPlayers().getRotationToId(key)); // mask
+                    OperationVector.setTemp_vector(mg.getCamera().up.x,mg.getCamera().up.y);
+
+
+                  //  System.out.println(mg.getMainClient().getVoiceChatClient().nVoiseID + " !!! " + key);
+
+
+                  if  (mg.getMainClient().getVoiceChatClient().nVoiseID == key) // динамик
+                    mg.getBatch().draw(microphone,
+                            (xz - 125), (yz - 125),
+                            125, 125,
+                            250, 250,
+                            0.5f, 0.5f,
+                            OperationVector.getTemp_vector().angleDeg() + 90
+                    ); // mask
+
+                   // ник
+
+                    BitmapFont nik = new BitmapFont();
+                   nik.setColor(Color.RED);
+                    nik.draw(mg.getBatch(), otherPlayers.getNikName(key), xz, yz
+
+                        ); // mask
+                    if (key>0) System.out.println(key + "  " + mg.getMainClient().myIdConnect);
+
+
                 } catch (NullPointerException e) {
                     //System.out.println("rener other");
                     //e.printStackTrace();

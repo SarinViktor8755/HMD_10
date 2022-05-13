@@ -63,9 +63,7 @@ public class Hud implements Disposable {
 
     Table table2;
 
-
     Float[] ddArrayAlpha = new Float[]{0f, 0f, 0f};
-
 
 
     public int getTimer() {
@@ -265,7 +263,7 @@ public class Hud implements Disposable {
        // voiseOut = false;
         this.deathMess.updateMess(Gdx.graphics.getDeltaTime(), declaration_death1, declaration_death2, declaration_death3);
         this.endingMathHUD.setUpdateToServer(true);//table2.setPosition(MathUtils.random(500),2);
-        Gdx.app.error("voiseOut>>>", String.valueOf(voiseOut));
+       // Gdx.app.error("voiseOut>>>", String.valueOf(voiseOut));
     }
 
 

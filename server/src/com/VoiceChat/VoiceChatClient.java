@@ -123,7 +123,6 @@ public class VoiceChatClient implements Disposable{
 					// Read data
 					VoiceNetData message = (VoiceNetData)object;					
 					short[] data = message.getData();
-					
 					// Play audio
 					processAudio(data, connection, message);
 				}

@@ -178,226 +178,240 @@ hit1
   orig: 88, 88
   offset: 0, 0
   index: -1
-tr9g
+microphone
   rotate: false
   xy: 2, 452
+  size: 84, 85
+  orig: 84, 85
+  offset: 0, 0
+  index: -1
+tr9g
+  rotate: false
+  xy: 88, 452
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr9
   rotate: false
-  xy: 68, 452
+  xy: 154, 452
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr8
   rotate: false
-  xy: 134, 452
+  xy: 220, 452
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr7
   rotate: false
-  xy: 200, 452
+  xy: 286, 452
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr6g
   rotate: false
-  xy: 266, 452
+  xy: 352, 452
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr6
   rotate: false
-  xy: 332, 452
+  xy: 418, 452
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr5g
   rotate: false
-  xy: 398, 452
+  xy: 2, 539
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr5
   rotate: false
-  xy: 2, 518
+  xy: 2, 605
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr4g
   rotate: false
-  xy: 2, 584
+  xy: 2, 671
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr4
   rotate: false
-  xy: 2, 650
+  xy: 2, 737
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr3g
   rotate: false
-  xy: 2, 716
+  xy: 2, 803
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr3
   rotate: false
-  xy: 2, 782
+  xy: 2, 869
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr2g
   rotate: false
-  xy: 2, 848
+  xy: 2, 935
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr2
   rotate: false
-  xy: 2, 914
+  xy: 68, 539
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr1g
   rotate: false
-  xy: 68, 518
+  xy: 134, 539
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 tr1
   rotate: false
-  xy: 134, 518
+  xy: 200, 539
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 shag5
   rotate: false
-  xy: 200, 518
+  xy: 266, 539
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 shag3
   rotate: false
-  xy: 266, 518
+  xy: 332, 539
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 shag4
   rotate: false
-  xy: 266, 518
+  xy: 332, 539
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 shag2
   rotate: false
-  xy: 332, 518
+  xy: 398, 539
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 shag1
   rotate: false
-  xy: 398, 518
+  xy: 68, 605
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 shag0
   rotate: false
-  xy: 68, 584
+  xy: 68, 671
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 blood6
   rotate: false
-  xy: 68, 650
+  xy: 68, 737
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 blood5
   rotate: false
-  xy: 68, 716
+  xy: 68, 803
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 blood4
   rotate: false
-  xy: 68, 782
+  xy: 68, 869
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 blood3
   rotate: false
-  xy: 68, 848
+  xy: 68, 935
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 blood2
   rotate: false
-  xy: 68, 914
+  xy: 134, 605
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 blood1
   rotate: false
-  xy: 134, 584
+  xy: 200, 605
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 blood
   rotate: false
-  xy: 200, 584
+  xy: 266, 605
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-bullet
+microphone1
   rotate: false
   xy: 452, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+bullet
+  rotate: false
+  xy: 486, 2
   size: 20, 18
   orig: 20, 18
   offset: 0, 0
   index: -1
 aim
   rotate: false
-  xy: 474, 2
+  xy: 486, 22
   size: 10, 10
   orig: 10, 10
   offset: 0, 0
   index: -1
 night
   rotate: false
-  xy: 474, 14
+  xy: 508, 2
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

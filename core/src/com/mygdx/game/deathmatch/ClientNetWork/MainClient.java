@@ -319,9 +319,7 @@ public class MainClient {
             }
         }
 
-
     }
-
 
     private void sendMyNik() {
         mg.getMainClient().getOutStock().addStockInQuery(new RequestStock(// отправить на сервер

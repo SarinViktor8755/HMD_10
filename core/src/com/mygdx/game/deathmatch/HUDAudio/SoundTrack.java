@@ -60,7 +60,7 @@ public class SoundTrack {
 
     }
 
-    public void pleyLostPrimuschestvo(int position, int frag) {
+    public void pleyLostPrimuschestvo(int position, int frag) { // потерл лидером
         if (this.position == 1 && position != 1 && mainGaming.getHud().getMyFrags() > 2) { // больше не лидером
             mainGaming.getHero().getPoolBlood().startingAdLostLead();
           //  if (mainGaming.getHud().getMyFrags() > 1) {

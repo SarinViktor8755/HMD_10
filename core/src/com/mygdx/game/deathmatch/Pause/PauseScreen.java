@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -109,9 +110,13 @@ public class PauseScreen implements Screen {
 
     private void updaeteVolmeMusic() {
         if (!music.isLooping()) {
+            try {
             music.play();
             music.setVolume(0);
             music.setLooping(true);
+            }catch (GdxRuntimeException e){
+                e.printStackTrace();
+            }
         }
         if (timer / 3 <= 1) {
             music.setVolume(timer / 3);

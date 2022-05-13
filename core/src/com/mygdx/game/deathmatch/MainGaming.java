@@ -176,8 +176,8 @@ public class MainGaming implements Screen {
 
         }
 
-
         updateVC();
+
         getHud().update();
 
         //   System.out.println("assets:: " + AssetsManagerGame.loadAsset(zk.assetsManagerGame));
@@ -218,6 +218,7 @@ public class MainGaming implements Screen {
         soundtrack.ubdate(dt);
         hud.render(dt);
         this.timeInGame += delta;
+        muteMusic(delta);
 
         getBatch().begin();
         getHero().getPoolBlood().renderAd(getBatch());
@@ -245,23 +246,37 @@ public class MainGaming implements Screen {
         // System.out.println("isVoice " + apInput.isVoice() + "   isInVoise()"+ mainClient.getVoiceChatClient().isInVoise());
 ///////////////[
         //System.out.println(apInput.isVoice());
-        if (mainClient.getVoiceChatClient().isInVoise() || apInput.isVoice())
+
+
+        getHero().setVoiseNomer(getMainClient().getVoiceChatClient().nVoiseID);
+
+
+    }
+
+    private void muteMusic(float drltaTime){}
+
+
+/////////////////
+
+    private void muteSound(float deltaTime){
+        if (mainClient.getVoiceChatClient().isInVoise() || apInput.isVoice()){
             audioEngine.musicGame.muteOut(true);
-        else audioEngine.musicGame.muteOut(false);
+        }
+        else {
+            audioEngine.musicGame.muteOut(false);
+            getHero().setVoiseNomer(Integer.MIN_VALUE);
+        }
 
         if (zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()) {
-            if (MathUtils.randomBoolean()) System.out.println("VOISE OUT> >");
-            else System.out.println("VOISE > OUT");
+//            if (MathUtils.randomBoolean()) System.out.println("VOISE OUT> >");
+//            else System.out.println("VOISE > OUT");
             // audioEngine.musicGame.muteOut(true);
-            System.out.println("!!!!!!!!!!");
+            //         System.out.println("!!!!!!!!!!");
 //            // Sends audio data to the server.
             mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
         }
 
     }
-
-
-/////////////////
 
 
     public void renderAim() { // отрисовать прицел

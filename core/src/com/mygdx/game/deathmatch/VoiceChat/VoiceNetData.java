@@ -3,7 +3,8 @@ package com.mygdx.game.deathmatch.VoiceChat;
 public class VoiceNetData {
 
 	private short[] data;
-	
+	private int id;
+
 	public VoiceNetData(){
 		
 	}
@@ -14,5 +15,13 @@ public class VoiceNetData {
 	
 	public short[] getData(){
 		return data;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
