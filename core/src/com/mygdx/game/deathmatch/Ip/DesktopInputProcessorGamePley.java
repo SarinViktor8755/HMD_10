@@ -25,7 +25,7 @@ public class DesktopInputProcessorGamePley implements InputProc {
         this.mg = mg;
         move = false;
         move_vector = new Vector2(0, 0);
-
+        Gdx.input.setCursorCatched(true);
         leftB = false;
         rideB = false;
         bottomB = false;

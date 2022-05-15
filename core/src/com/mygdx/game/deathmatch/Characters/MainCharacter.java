@@ -550,13 +550,13 @@ public class MainCharacter extends Actor {
                   }// mask
 
                    // ник
-
-                    BitmapFont nik = new BitmapFont();
-                   nik.setColor(Color.RED);
-                    nik.draw(mg.getBatch(), otherPlayers.getNikName(key), xz, yz
-
-                        ); // mask
-                    if (key>0) System.out.println(key + "  " + mg.getMainClient().myIdConnect);
+//
+//                    BitmapFont nik = new BitmapFont();
+//                   nik.setColor(Color.RED);
+//                    nik.draw(mg.getBatch(), otherPlayers.getNikName(key), xz, yz
+//
+//                        ); // mask
+//                    if (key>0) System.out.println(key + "  " + mg.getMainClient().myIdConnect);
 
 
                 } catch (NullPointerException e) {

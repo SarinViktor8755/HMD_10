@@ -157,6 +157,7 @@ public class VoiceChatClient implements Disposable{
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
+
 				short[] received = message.getData();
 				player.writeSamples(received, 0, received.length);
 			}

@@ -9,10 +9,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration ();
 		config.setWindowedMode(ZombiKiller.WHIDE_SCREEN/2,ZombiKiller.HIDE_SCREEN/2);
 		config.setTitle("HOTLINE DEATHMATCH") ;
-//		config.width = ZombiKiller.WHIDE_SCREEN / 2;
-//		config.height = ZombiKiller.HIDE_SCREEN / 2;
 
-		//  config.setWindowedMode(ZombiKiller.WHIDE_SCREEN / 2,ZombiKiller.HIDE_SCREEN / 2);
 		new Lwjgl3Application(new ZombiKiller(3), config);
 	}
 }

@@ -28,12 +28,13 @@ public class MusicGame {
 
     public void muteOut(boolean down) { // приглушаем музыку для воис чата
         if (down) {
-            music.stop();
+           // music.pause();
+            music.setVolume(0);
             counVice = 0;
 
         } else {
 
-            if (counVice > 15) music.play();
+            if (counVice > 15) music.setVolume(1);
             counVice++;
            // System.out.println(counVice);
         }
