@@ -157,9 +157,10 @@ public class VoiceChatClient implements Disposable{
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-
+				try {
 				short[] received = message.getData();
 				player.writeSamples(received, 0, received.length);
+				}catch (Exception e){}
 			}
 		});
 		thread.start();
@@ -175,7 +176,7 @@ public class VoiceChatClient implements Disposable{
 		server.addListener(new Listener(){
 			public void received(Connection connection, Object object) {
 				if(object instanceof VoiceNetData){
-
+try {
 					// Read data
 					VoiceNetData message = (VoiceNetData)object;					
 					final short[] data = message.getData();
@@ -188,6 +189,7 @@ public class VoiceChatClient implements Disposable{
 						}
 					});
 					thread.start();
+				}catch (Exception e){}
 				}
 			}			
 		});
@@ -219,6 +221,9 @@ public class VoiceChatClient implements Disposable{
 			Thread thread = new Thread(new Runnable() {
 				@Override
 				public void run() {
+					try {
+
+
 					// Need to check if data needs sending. TODO
 					int packetSize = (int) (VoiceChatClient.this.getSampleRate() / VoiceChatClient.this.getSendRate());
 					if (data == null) {
@@ -233,7 +238,7 @@ public class VoiceChatClient implements Disposable{
 					// Send to server, this will not block but may affect networking...
 					client.sendUDP(new VoiceNetData(data));
 					ready = true;
-
+				}catch (Exception e){}
 				}
 			});
 			thread.start();			
