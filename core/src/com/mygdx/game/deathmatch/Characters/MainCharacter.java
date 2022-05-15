@@ -290,7 +290,7 @@ public class MainCharacter extends Actor {
 
 
         try {
-            lith.upDateLights(this.position.x, this.position.y, this.cookAngle.angle());
+            lith.upDateLights(this.position.x, this.position.y, this.cookAngle.angle(),mg.getHud().getTimer());
         } catch (Exception e) {
         }
 
@@ -713,9 +713,16 @@ public class MainCharacter extends Actor {
 
     public String getMyNikNamePlayer(int id) {  // взять ник любого игрока
         String result = mg.getHero().getNikNameplayer();
-        if (id < 0) result = getNikNameGen(id);
-        else result = otherPlayers.getNikName(id);
-        if (result == null) return "";
+        if (id < 0) return getNikNameGen(id);
+
+        if (id > 0) {
+            result = otherPlayers.getNikName(id);
+            if(id == mg.getMainClient().myIdConnect) result = nikNameplayer;
+        }
+        System.out.println(result);
+//        if (id < 0) result = getNikNameGen(id);
+//        else result = otherPlayers.getNikName(id);
+//        if (result == null) return "";
         return result;
     }
 

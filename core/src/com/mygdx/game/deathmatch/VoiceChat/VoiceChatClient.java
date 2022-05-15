@@ -126,21 +126,13 @@ public class VoiceChatClient implements Disposable{
 				inVoise = false;
 				// Only read objects of the correct type.
 				if(object instanceof VoiceNetData){
-
-
 					inVoise = true;
 					// Read data
 					VoiceNetData message = (VoiceNetData)object;
-					System.out.println("<<--- IN VOISE  " + message.getId());
+					System.out.println("<<--- IN VOISE  " + connection.getID());
 					short[] data = message.getData();
 
-					// Play audio
 					processAudio(data, connection, message);
-					//System.out.println("!!::: ___  "+ nVoiseID);
-
-					nVoiseID = message.getId();
-
-
 
 				}
 			}			

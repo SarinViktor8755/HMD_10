@@ -47,7 +47,7 @@ public class B2lights {
         PointLight pl;
 
 
-            // поле
+        // поле
         for (int i = 0; i < 5000; i += 500) {
             for (int j = 0; j < 5000; j += 500) {
                 pl = new PointLight(rayHandlerHero, 10, getColorFromPoint(), 1300, j, i);
@@ -56,7 +56,7 @@ public class B2lights {
             }
         }
         coneLightTower = new ConeLight(rayHandlerHero, 3, Color.RED, 1800, 0, 0, 45, 4); // лазер
-        pointLightHero = new PointLight(rayHandlerHero, 4, Color.ROYAL, 600, 0, 0); /// свитильник героя
+        pointLightHero = new PointLight(rayHandlerHero, 4, Color.WHITE, 300, 0, 0); /// свитильник героя
         coneLightHero = new ConeLight(rayHandlerHero, 65, Color.ROYAL, 1500, 0, 0, 90, 60);
 //
 
@@ -92,21 +92,33 @@ public class B2lights {
     }
 
 
-    public void upDateLights(float xHero, float yHero, float align) {
+    public void upDateLights(float xHero, float yHero, float align, float timer) {
         world.step(1 / 30f, 1, 1);
         coneLightHero.setPosition(xHero, yHero);
         pointLightHero.setPosition(xHero, yHero);
         coneLightHero.setDirection(align);
         buletFlash.upDate();
 
-
         /////////////////////
-         laserLith = MathUtils.clamp(laserLith, 300, 1800);
+        laserLith = MathUtils.clamp(laserLith, 300, 1800);
         coneLightTower.setDistance(laserLith);
         if (lasetOn) laserLith = laserLith + Gdx.graphics.getDeltaTime() * 550;
         else laserLith = laserLith - Gdx.graphics.getDeltaTime() * 550;
         coneLightTower.setDistance(laserLith);
+        attenuation(timer); // затухание локации
 
+
+
+    }
+
+    private  void attenuation(float timer){
+        float TIMER_END = 20_000;
+        if (timer < TIMER_END) {
+            for (int i = 0; i < pointLightsList.size(); i++) {
+                pointLightsList.get(i).setDistance(MathUtils.map(0, TIMER_END, 0, 1300, timer));
+            }
+            pointLightHero.setDistance(MathUtils.map(0, TIMER_END, 0, 300, timer));
+        }
     }
 
     public void renderLights(OrthographicCamera camera) {

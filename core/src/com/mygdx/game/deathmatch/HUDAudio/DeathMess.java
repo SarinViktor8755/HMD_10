@@ -51,7 +51,6 @@ public class DeathMess {
         mess.addFirst(a);
         a.setTimeLife(2.5f);
         a.setMess(p1);
-
     }
 
 

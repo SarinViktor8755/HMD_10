@@ -296,13 +296,12 @@ public class MainClient {
             Network.UpdateNames ub = (Network.UpdateNames) object;
             //System.out.println("!!!   " + Arrays.toString(ub.names));
             for (int i = 0; i < ub.names.length; i++) {
-//                System.out.println();
-//                System.out.println(ub.names[i]);
-//                System.out.println(ub.names[i].indexOf("||__||"));
+
                 String s=ub.names[i];
                 String name = s.substring(0,s.indexOf("||__||"));
                 int id = Integer.valueOf(s.substring(name.length()+6,ub.names[i].length()));
                 mg.getHero().getOtherPlayers().setNikName(id,name);
+
                //  System.out.println("name  " + name + "  " + id);
 
             }
@@ -321,8 +320,9 @@ public class MainClient {
 
     }
 
-    private void sendMyNik() {
-        mg.getMainClient().getOutStock().addStockInQuery(new RequestStock(// отправить на сервер
+    public void sendMyNik() {
+        System.out.println("sendMyNik");
+        mg.getMainClient().getOutStock().addStockInQuery(new RequestStock(// отправить на сервер ник
                 mg.getMainClient().getAndUpdateRealTime(), Key_cod.MY_NIK_TO_SERVER,
                 null, null,
                 null, null, null, null, null, NikName.getNikName()
