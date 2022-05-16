@@ -58,7 +58,6 @@ public class RouteResponseRequests {  // роутр запросов
                        //     System.out.println(in.textM + ">>>   NikName");
                             stockBase.addOutSteckOut(in, nomerP); // записывает в стек ИН - если такое сообщение уже было - то просто хранться в ИН если нет, наоборот записывает
                             gameServer.calculationСontact.getHit(in.p1, in.p2, nomerP, 0, 110);//подсчет попадания удара
-
                         }
 
                     } catch (Exception e) {
@@ -157,8 +156,6 @@ public class RouteResponseRequests {  // роутр запросов
                     gameServer.snapShots.setLive(nomerP, true); // мертвый -> живой
                     gameServer.getSnapShots().clenSnapShotsToPleyer(nomerP);
                 }
-
-
                 return true;
             }
         }

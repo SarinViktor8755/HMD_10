@@ -249,8 +249,8 @@ public class MainGaming implements Screen {
 ///////////////[
         //System.out.println(apInput.isVoice());
 
-
-        getHero().setVoiseNomer(getMainClient().getVoiceChatClient().nVoiseID);
+        getMainClient().getVoiceChatClient().updateTimer(deltaTime);
+        //getHero().setVoiseNomer(getMainClient().getVoiceChatClient().nVoiseID); // номер входящего звонка
         muteSound(deltaTime);
 
     }
@@ -267,7 +267,7 @@ public class MainGaming implements Screen {
         else {
             audioEngine.musicGame.muteOut(false);
             getHero().setVoiseNomer(Integer.MIN_VALUE);
-            getMainClient().getVoiceChatClient().nVoiseID = Integer.MIN_VALUE;
+          //  getMainClient().getVoiceChatClient().nVoiseID = Integer.MIN_VALUE;
         }
 
         if (zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()) {

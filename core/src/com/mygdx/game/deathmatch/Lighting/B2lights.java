@@ -107,15 +107,13 @@ public class B2lights {
         coneLightTower.setDistance(laserLith);
         attenuation(timer); // затухание локации
 
-
-
     }
 
     private  void attenuation(float timer){
-        float TIMER_END = 20_000;
+        float TIMER_END = 40_000;
         if (timer < TIMER_END) {
             for (int i = 0; i < pointLightsList.size(); i++) {
-                pointLightsList.get(i).setDistance(MathUtils.map(0, TIMER_END, 0, 1300, timer));
+                pointLightsList.get(i).setDistance(MathUtils.map(0, TIMER_END, 400, 1300, timer));
             }
             pointLightHero.setDistance(MathUtils.map(0, TIMER_END, 0, 300, timer));
         }

@@ -17,7 +17,6 @@ import com.mygdx.game.deathmatch.VoiceChat.VoiceChatClient;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.util.Arrays;
 
 public class MainClient {
 
@@ -328,6 +327,8 @@ public class MainClient {
                 null, null, null, null, null, NikName.getNikName()
         ));
     }
+
+
 
 }
 

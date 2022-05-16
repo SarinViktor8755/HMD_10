@@ -25,6 +25,7 @@ public class StaticService {
 
     static public int getDistance(int x1, int y1, int x2, int y2) { // посчитать расстояние
         return (int) Math.sqrt((float) ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
+
     }
 
     static public int getDistance(Vector2 a, Vector2 b) { // посчитать расстояние

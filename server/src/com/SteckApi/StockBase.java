@@ -1,6 +1,7 @@
 package com.SteckApi;
 
 import com.*;
+import com.mygdx.game.deathmatch.Service.Key_cod;
 import com.mygdx.game.deathmatch.Service.TimeService;
 
 
@@ -136,6 +137,19 @@ public class StockBase {
             getOutMess().addStockOutQuery(new RequestStockServer(stockMess, plroom.get(i)));
         }
         this.messageRatingKillTime(nomP);
+    }
+
+    public void who_spik(int idPlayer) {    // --- кто говорит по рации
+        //ArrayList<Integer> plroom = gameServer.getListPlayer();
+        Network.StockMess stockMess = new Network.StockMess();
+        stockMess.time_even = TimeService.getTimeGame() * (-1);
+        stockMess.tip = Key_cod.WHO_TALKIN;
+        stockMess.nomer_pley = idPlayer;
+        gameServer.getServer().sendToAllTCP(stockMess);
+//        for (int i = 0; i < plroom.size(); i++) {
+//            getOutMess().addStockOutQuery(new RequestStockServer(stockMess, plroom.get(i)));
+//        }
+        //this.messageRatingKillTime(nomP);
     }
 
     public void messagePlayerDestruction(int nomP,int angel,int weapon) {    // --- сообщение уничтичтожение игрока - ОГНЕСТРЕЛОМ

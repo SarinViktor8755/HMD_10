@@ -1,5 +1,4 @@
 package com.mygdx.game.deathmatch.VoiceChat;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.AudioDevice;
 import com.badlogic.gdx.audio.AudioRecorder;
@@ -22,12 +21,12 @@ import com.esotericsoftware.kryonet.Server;
  * @author James Billy, 2017
  *
  */
-public class VoiceChatClient implements Disposable{
+public class VoiceChatClient_OLD implements Disposable{
 
 	/**
 	 * The default sampling rate for audio. 22050.
 	 */
-	private static final int DEFAULT_SAMPLE_RATE = 22050;
+	private static final int DEFAULT_SAMPLE_RATE = 8000;
 	private AudioRecorder recorder;
 	private AudioDevice player;
 	private int sampleRate = DEFAULT_SAMPLE_RATE; // Default and standard.
@@ -35,9 +34,9 @@ public class VoiceChatClient implements Disposable{
 	private short[] data;
 	private float timer;
 	private boolean ready = true;
+	private boolean inVoise = false;
 
-	private float  timer_voice_delay;///таймер на задержку голоса
-	
+
 	/**
 	 * Creates a new {@link VoiceChatClient} and registers net objects.
 	 * @param kryo The {@link Kryo} object that exists in KryoNet Clients and Servers.
@@ -47,23 +46,23 @@ public class VoiceChatClient implements Disposable{
 	 * <li> {@link #addReceiver(Client)} to allow this voice client to play audio sent from other clients.
 	 * <li> {@link #sendVoice(Client, float)} to send the users voice to other clients, through the server.
 	 */
-	public VoiceChatClient(Kryo kryo, int sampleRate){
+	public VoiceChatClient_OLD(Kryo kryo, int sampleRate){
 		this(kryo);
 		
 		this.sampleRate = sampleRate;
-		this.timer_voice_delay =0;
 	}	
 	
 	/**
-	 * Creates a new {@link VoiceChatClient} and registers net objects.
+	 * Creates a new {@link VoiceChatClient_OLD} and registers net objects.
 	 * @param kryo The {@link Kryo} object that exists in KryoNet Clients and Servers.
 	 * <li>See <code>client.getKryo()</code> and <code>server.getKryo()</code>.
 	 * @see 
 	 * <li> {@link #addReceiver(Client)} to allow this voice client to play audio sent from other clients.
 	 * <li> {@link #sendVoice(Client, float)} to send the users voice to other clients, through the server.
 	 */
-	public VoiceChatClient(Kryo kryo){
+	public VoiceChatClient_OLD(Kryo kryo){
 		this.registerNetObjects(kryo);
+		//access_audio_recording  = true; // доступ к записи звука
 	}
 	
 	/**
@@ -83,11 +82,15 @@ public class VoiceChatClient implements Disposable{
 	public float getSendRate(){
 		return this.sendRate;
 	}
-	
+
 	private void createRecorder(){
-		this.recorder = Gdx.audio.newAudioRecorder(this.getSampleRate(), true);
+
+			this.recorder = Gdx.audio.newAudioRecorder(this.getSampleRate(), true);
+
+
 	}
-	
+
+
 	private void createPlayer(){
 		this.player = Gdx.audio.newAudioDevice(this.getSampleRate(), true);
 	}
@@ -119,16 +122,17 @@ public class VoiceChatClient implements Disposable{
 		
 		client.addListener(new Listener(){
 			public void received(Connection connection, Object object) {
-				
+				inVoise = false;
 				// Only read objects of the correct type.
 				if(object instanceof VoiceNetData){
-					
+					inVoise = true;
 					// Read data
-					VoiceNetData message = (VoiceNetData)object;					
+					VoiceNetData message = (VoiceNetData)object;
+					System.out.println("<<--- IN VOISE  " + connection.getID());
 					short[] data = message.getData();
-					
-					// Play audio
+
 					processAudio(data, connection, message);
+
 				}
 			}			
 		});
@@ -144,8 +148,10 @@ public class VoiceChatClient implements Disposable{
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
+				try {
 				short[] received = message.getData();
 				player.writeSamples(received, 0, received.length);
+				}catch (Exception e){}
 			}
 		});
 		thread.start();
@@ -161,20 +167,20 @@ public class VoiceChatClient implements Disposable{
 		server.addListener(new Listener(){
 			public void received(Connection connection, Object object) {
 				if(object instanceof VoiceNetData){
-					
+try {
 					// Read data
 					VoiceNetData message = (VoiceNetData)object;					
 					final short[] data = message.getData();
-
+					
 					// Play audio
 					Thread thread = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							System.out.println("<<--- IN VOISE ");
 							player.writeSamples(data, 0, data.length);
 						}
 					});
 					thread.start();
+				}catch (Exception e){}
 				}
 			}			
 		});
@@ -190,7 +196,7 @@ public class VoiceChatClient implements Disposable{
 	 * If this method is called 60 times per second, this value should be (1/60). In LibGDX, use <code>Gdx.graphics.getDeltaTime()</code>.
 	 */
 	public void sendVoice(final Client client, float delta){
-		
+		System.out.println(client.getID());
 		float interval = 1f / this.getSendRate();
 		timer += delta;
 		if(timer >= interval){
@@ -206,21 +212,24 @@ public class VoiceChatClient implements Disposable{
 			Thread thread = new Thread(new Runnable() {
 				@Override
 				public void run() {
+					try {
+
+
 					// Need to check if data needs sending. TODO
-					int packetSize = (int) (VoiceChatClient.this.getSampleRate() / VoiceChatClient.this.getSendRate());
+					int packetSize = (int) (VoiceChatClient_OLD.this.getSampleRate() / VoiceChatClient_OLD.this.getSendRate());
 					if (data == null) {
 						data = new short[packetSize];
 					}
 
 					// This will block! We need to do this in a separate thread!
-					if (VoiceChatClient.this.recorder == null)
-						VoiceChatClient.this.createRecorder();
-					VoiceChatClient.this.recorder.read(data, 0, packetSize);
+					if (VoiceChatClient_OLD.this.recorder == null)
+						VoiceChatClient_OLD.this. createRecorder();
+						VoiceChatClient_OLD.this.recorder.read(data, 0, packetSize);
 
 					// Send to server, this will not block but may affect networking...
 					client.sendUDP(new VoiceNetData(data));
-					System.out.println("VoiseOUT >>");
 					ready = true;
+				}catch (Exception e){}
 				}
 			});
 			thread.start();			
@@ -240,10 +249,6 @@ public class VoiceChatClient implements Disposable{
 	}
 
 	public boolean isInVoise() {
-		return false;
-	}
-
-	public void updateTimer(float dt){
-		timer_voice_delay-=dt;
+		return inVoise;
 	}
 }

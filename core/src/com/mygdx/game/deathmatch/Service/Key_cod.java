@@ -10,7 +10,8 @@ public class Key_cod {
     public static final int SHOTGUN_SHOT = 3;
     public static final int STICK_ATTACK = 1;
     public static final int REQUEST_FOR_PARAMETERS = 502;
-    public static final int MY_NIK_TO_SERVER = -4;
+    public static final int MY_NIK_TO_SERVER = -4; // прислал ник нейм
+    public static final int WHO_TALKIN =  - 5; // ИД того кто говорит
 
 
 }
