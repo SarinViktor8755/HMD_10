@@ -55,6 +55,7 @@ public class MainClient {
             public void connected(Connection connection) {
                 setMyIdConnect(connection.getID());
                 sendMyNik();
+                System.out.println(client.getID() + " ID MY");
             }
 
             public void received(Connection connection, Object object) {
@@ -299,7 +300,13 @@ public class MainClient {
                 String s=ub.names[i];
                 String name = s.substring(0,s.indexOf("||__||"));
                 int id = Integer.valueOf(s.substring(name.length()+6,ub.names[i].length()));
-                mg.getHero().getOtherPlayers().setNikName(id,name);
+                try {
+                    mg.getHero().getOtherPlayers().setNikName(id,name);
+                }catch (NullPointerException e){
+                    mg.getHero().getOtherPlayers().addPlayer(id);
+                    mg.getHero().getOtherPlayers().setNikName(id,name);
+                }
+
 
                //  System.out.println("name  " + name + "  " + id);
 

@@ -12,6 +12,7 @@ public class Network {
 
     public static int udpPort = 37960, tcpPort = 37960;
 
+
     static public void register(EndPoint endPoint) {
         Kryo kryo = endPoint.getKryo();
         kryo.register(Integer.class);

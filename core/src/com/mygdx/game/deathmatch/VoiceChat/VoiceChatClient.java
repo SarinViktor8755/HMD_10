@@ -30,8 +30,8 @@ public class VoiceChatClient implements Disposable{
 	private static final int DEFAULT_SAMPLE_RATE = 22050;
 	private AudioRecorder recorder;
 	private AudioDevice player;
-	private int sampleRate = DEFAULT_SAMPLE_RATE; // Default and standard.
-	private float sendRate = 20f;
+	private int sampleRate = 11025; // Default and standard.
+	private float sendRate = 10f;
 	private short[] data;
 	private float timer;
 	private boolean ready = true;
@@ -51,7 +51,7 @@ public class VoiceChatClient implements Disposable{
 		this(kryo);
 		
 		this.sampleRate = sampleRate;
-		this.timer_voice_delay =0;
+		this.timer_voice_delay = 0;
 	}	
 	
 	/**
@@ -119,16 +119,20 @@ public class VoiceChatClient implements Disposable{
 		
 		client.addListener(new Listener(){
 			public void received(Connection connection, Object object) {
-				
+
 				// Only read objects of the correct type.
 				if(object instanceof VoiceNetData){
-					
+			//		System.out.println("<< IN");
+
+
 					// Read data
 					VoiceNetData message = (VoiceNetData)object;					
 					short[] data = message.getData();
 					
 					// Play audio
 					processAudio(data, connection, message);
+
+
 				}
 			}			
 		});
@@ -141,19 +145,24 @@ public class VoiceChatClient implements Disposable{
 	 * @param message The message received.
 	 */
 	public void processAudio(short[] samples, Connection connection, final VoiceNetData message){
+		//System.out.println(connection.getID());
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				short[] received = message.getData();
-				player.writeSamples(received, 0, received.length);
+				try {
+					player.writeSamples(received, 0, received.length);
+				}catch (Exception e){}
+
 			}
 		});
 		thread.start();
+		this.updateTimerStap();
 	}
-	
+
+
 	@Deprecated
 	public void addReceiver(Server server){
-		
 		if(this.player == null)
 			this.createPlayer();
 		final AudioDevice player = this.player;
@@ -161,7 +170,7 @@ public class VoiceChatClient implements Disposable{
 		server.addListener(new Listener(){
 			public void received(Connection connection, Object object) {
 				if(object instanceof VoiceNetData){
-					
+				//	System.out.println("<<--- IN VOISE ");
 					// Read data
 					VoiceNetData message = (VoiceNetData)object;					
 					final short[] data = message.getData();
@@ -170,7 +179,7 @@ public class VoiceChatClient implements Disposable{
 					Thread thread = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							System.out.println("<<--- IN VOISE ");
+						//	System.out.println("<<--- IN VOISE ");
 							player.writeSamples(data, 0, data.length);
 						}
 					});
@@ -190,7 +199,7 @@ public class VoiceChatClient implements Disposable{
 	 * If this method is called 60 times per second, this value should be (1/60). In LibGDX, use <code>Gdx.graphics.getDeltaTime()</code>.
 	 */
 	public void sendVoice(final Client client, float delta){
-		
+
 		float interval = 1f / this.getSendRate();
 		timer += delta;
 		if(timer >= interval){
@@ -206,6 +215,7 @@ public class VoiceChatClient implements Disposable{
 			Thread thread = new Thread(new Runnable() {
 				@Override
 				public void run() {
+				//	System.out.println("VoiseOUT >>");
 					// Need to check if data needs sending. TODO
 					int packetSize = (int) (VoiceChatClient.this.getSampleRate() / VoiceChatClient.this.getSendRate());
 					if (data == null) {
@@ -219,13 +229,22 @@ public class VoiceChatClient implements Disposable{
 
 					// Send to server, this will not block but may affect networking...
 					client.sendUDP(new VoiceNetData(data));
-					System.out.println("VoiseOUT >>");
+
 					ready = true;
 				}
 			});
 			thread.start();			
 		}		
-	}	
+	}
+
+	synchronized public void updateTimerStap(){
+		this.timer_voice_delay = 10;
+	}
+
+
+	synchronized public void updateTimerMinus(){ // это в апдейд
+		this.timer_voice_delay--;
+	}
 	
 	/**
 	 * Disposes this voice chat client, which releases all resources but also makes this object unusable. 
@@ -240,10 +259,11 @@ public class VoiceChatClient implements Disposable{
 	}
 
 	public boolean isInVoise() {
+		if (timer_voice_delay > 0) return true;
 		return false;
 	}
 
-	public void updateTimer(float dt){
-		timer_voice_delay-=dt;
-	}
+
+
+
 }

@@ -90,6 +90,7 @@ public class MainGaming implements Screen {
         //mainClient.coonectToServer();
         mainClient.coonectToServer();
 
+
     }
 
     @Override
@@ -249,9 +250,10 @@ public class MainGaming implements Screen {
 ///////////////[
         //System.out.println(apInput.isVoice());
 
-        getMainClient().getVoiceChatClient().updateTimer(deltaTime);
-        //getHero().setVoiseNomer(getMainClient().getVoiceChatClient().nVoiseID); // номер входящего звонка
+        getMainClient().getVoiceChatClient().updateTimerMinus();
+
         muteSound(deltaTime);
+
 
     }
 
@@ -271,8 +273,9 @@ public class MainGaming implements Screen {
         }
 
         if (zk.isAccess_audio_recording() && apInput.isVoice() && !mainClient.getVoiceChatClient().isInVoise()) {
-           // if (MathUtils.randomBoolean()) System.out.println("VOISE OUT> >");
-          //  else System.out.println("VOISE > OUT ");
+//            if (MathUtils.randomBoolean()) System.out.println("VOISE OUT> >");
+//            else System.out.println("VOISE > OUT ");
+
             mainClient.getVoiceChatClient().sendVoice(mainClient.client, deltaTime);
         }
 
